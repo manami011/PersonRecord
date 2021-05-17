@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,15 @@
 		C85A2655264A4CB6007B3FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C85A2654264A4CB6007B3FF0 /* Assets.xcassets */; };
 		C85A2658264A4CB6007B3FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C85A2656264A4CB6007B3FF0 /* LaunchScreen.storyboard */; };
 		C85A2661264BC0A7007B3FF0 /* FaceCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2660264BC0A7007B3FF0 /* FaceCreateViewController.swift */; };
+		C85A2669264CF37F007B3FF0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2668264CF37F007B3FF0 /* Person.swift */; };
+		C85A266E264CF5A3007B3FF0 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A266D264CF5A3007B3FF0 /* Category.swift */; };
+		C85A2672264D0146007B3FF0 /* FaceExpressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2671264D0146007B3FF0 /* FaceExpressionViewController.swift */; };
+		C85A2675264D0787007B3FF0 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2674264D0787007B3FF0 /* Memo.swift */; };
+		C862CACD264E56AA0064880B /* NameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CACC264E56AA0064880B /* NameCreateViewController.swift */; };
+		C862CAD02651F7320064880B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CACF2651F7320064880B /* DetailViewController.swift */; };
+		C862CAD32651FAE30064880B /* MemoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CAD22651FAE30064880B /* MemoCreateViewController.swift */; };
+		C862CAD62651FB0E0064880B /* SavePersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CAD52651FB0E0064880B /* SavePersonViewController.swift */; };
+		C862CAD92651FB370064880B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CAD82651FB370064880B /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +39,15 @@
 		C85A2657264A4CB6007B3FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C85A2659264A4CB6007B3FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C85A2660264BC0A7007B3FF0 /* FaceCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCreateViewController.swift; sourceTree = "<group>"; };
+		C85A2668264CF37F007B3FF0 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		C85A266D264CF5A3007B3FF0 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		C85A2671264D0146007B3FF0 /* FaceExpressionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceExpressionViewController.swift; sourceTree = "<group>"; };
+		C85A2674264D0787007B3FF0 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		C862CACC264E56AA0064880B /* NameCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCreateViewController.swift; sourceTree = "<group>"; };
+		C862CACF2651F7320064880B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C862CAD22651FAE30064880B /* MemoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCreateViewController.swift; sourceTree = "<group>"; };
+		C862CAD52651FB0E0064880B /* SavePersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePersonViewController.swift; sourceTree = "<group>"; };
+		C862CAD82651FB370064880B /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +93,8 @@
 			children = (
 				C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */,
 				C85A264D264A4CB5007B3FF0 /* SceneDelegate.swift */,
-				C85A264F264A4CB5007B3FF0 /* ViewController.swift */,
-				C85A2660264BC0A7007B3FF0 /* FaceCreateViewController.swift */,
+				C85A266C264CF4A7007B3FF0 /* View */,
+				C85A266B264CF47C007B3FF0 /* Model */,
 				C85A2651264A4CB5007B3FF0 /* Main.storyboard */,
 				C85A2654264A4CB6007B3FF0 /* Assets.xcassets */,
 				C85A2656264A4CB6007B3FF0 /* LaunchScreen.storyboard */,
@@ -85,13 +103,37 @@
 			path = personRecord;
 			sourceTree = "<group>";
 		};
+		C85A266B264CF47C007B3FF0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C85A2668264CF37F007B3FF0 /* Person.swift */,
+				C85A2674264D0787007B3FF0 /* Memo.swift */,
+				C85A266D264CF5A3007B3FF0 /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C85A266C264CF4A7007B3FF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C85A264F264A4CB5007B3FF0 /* ViewController.swift */,
+				C85A2660264BC0A7007B3FF0 /* FaceCreateViewController.swift */,
+				C85A2671264D0146007B3FF0 /* FaceExpressionViewController.swift */,
+				C862CAD22651FAE30064880B /* MemoCreateViewController.swift */,
+				C862CACC264E56AA0064880B /* NameCreateViewController.swift */,
+				C862CACF2651F7320064880B /* DetailViewController.swift */,
+				C862CAD52651FB0E0064880B /* SavePersonViewController.swift */,
+				C862CAD82651FB370064880B /* CategoryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DF888827DA43B67B565A57B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				48135570B331BBC5BDC96E2C /* Pods-personRecord.debug.xcconfig */,
 				C2A69F3A5788948F4A4B04CA /* Pods-personRecord.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,10 +251,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85A2669264CF37F007B3FF0 /* Person.swift in Sources */,
 				C85A2650264A4CB5007B3FF0 /* ViewController.swift in Sources */,
 				C85A264C264A4CB5007B3FF0 /* AppDelegate.swift in Sources */,
+				C85A2675264D0787007B3FF0 /* Memo.swift in Sources */,
 				C85A264E264A4CB5007B3FF0 /* SceneDelegate.swift in Sources */,
 				C85A2661264BC0A7007B3FF0 /* FaceCreateViewController.swift in Sources */,
+				C862CAD32651FAE30064880B /* MemoCreateViewController.swift in Sources */,
+				C85A266E264CF5A3007B3FF0 /* Category.swift in Sources */,
+				C862CAD02651F7320064880B /* DetailViewController.swift in Sources */,
+				C862CACD264E56AA0064880B /* NameCreateViewController.swift in Sources */,
+				C862CAD92651FB370064880B /* CategoryViewController.swift in Sources */,
+				C862CAD62651FB0E0064880B /* SavePersonViewController.swift in Sources */,
+				C85A2672264D0146007B3FF0 /* FaceExpressionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
