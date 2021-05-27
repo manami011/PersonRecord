@@ -7,5 +7,8 @@ target 'personRecord' do
 
   # Pods for personRecord
   pod 'RealmSwift','10.1.4'
+  pod 'SVProgressHUD','2.2.5'
+  pod 'MBProgressHUD', '~> 1.2.0'
+  pod 'TagListView', '~> 1.0'
 
 end

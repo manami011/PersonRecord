@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FaceView" customModule="personRecord" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b00" translatesAutoresizingMaskIntoConstraints="NO" id="TLM-GN-A7L" userLabel="back">
+                    <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" translatesAutoresizingMaskIntoConstraints="NO" id="xtt-jk-7v4">
+                    <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="o00" translatesAutoresizingMaskIntoConstraints="NO" id="X4n-Kc-bSq" userLabel="outline">
+                    <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f00" translatesAutoresizingMaskIntoConstraints="NO" id="VHy-8C-4xj" userLabel="front">
+                    <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e00" translatesAutoresizingMaskIntoConstraints="NO" id="SV6-z4-5UW" userLabel="expression">
+                    <rect key="frame" x="0.0" y="0.0" width="215" height="247"/>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="5FW-nc-alF"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5VS-hm-JnL"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="86L-09-xlH"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CVI-Gy-CS2"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="E2m-Yi-uil"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="Ebp-1f-qp1"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="top" secondItem="TLM-GN-A7L" secondAttribute="top" id="JDX-Wk-hKy"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="Jsq-Qv-795"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="leading" secondItem="TLM-GN-A7L" secondAttribute="leading" id="KLv-nd-Pyg"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NXj-es-ux7"/>
+                <constraint firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="Qpb-pZ-8zd"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="S0g-Vk-Zfq"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="leading" secondItem="TLM-GN-A7L" secondAttribute="leading" id="S6x-Yx-DbV"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="leading" secondItem="TLM-GN-A7L" secondAttribute="leading" id="SRu-av-aIz"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="leading" secondItem="TLM-GN-A7L" secondAttribute="leading" id="Snb-yG-LDu"/>
+                <constraint firstItem="TLM-GN-A7L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Szv-xu-s2l"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="XX8-jN-2ge"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="top" secondItem="TLM-GN-A7L" secondAttribute="top" id="Y3X-fa-057"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="top" secondItem="TLM-GN-A7L" secondAttribute="top" id="bPK-go-1Ht"/>
+                <constraint firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="cPT-Fa-d68"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="top" secondItem="TLM-GN-A7L" secondAttribute="top" id="dWd-jh-m8o"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="hjd-9U-2Va"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jie-Xj-SaY"/>
+                <constraint firstItem="TLM-GN-A7L" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mbC-oP-8iL"/>
+                <constraint firstItem="TLM-GN-A7L" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oUv-we-Dkp"/>
+                <constraint firstItem="TLM-GN-A7L" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rTW-22-AT3"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="top" secondItem="TLM-GN-A7L" secondAttribute="top" id="raR-cx-G3c"/>
+                <constraint firstItem="SV6-z4-5UW" firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="rbg-bt-uLE"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uBu-Ji-fhi"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="bottom" secondItem="TLM-GN-A7L" secondAttribute="bottom" id="umm-jS-LA5"/>
+                <constraint firstItem="X4n-Kc-bSq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vOT-2P-4Ij"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="wHT-Zv-zDd"/>
+                <constraint firstItem="xtt-jk-7v4" firstAttribute="trailing" secondItem="TLM-GN-A7L" secondAttribute="trailing" id="wRC-Bx-XTg"/>
+                <constraint firstItem="VHy-8C-4xj" firstAttribute="leading" secondItem="TLM-GN-A7L" secondAttribute="leading" id="xR9-p0-n2B"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="back" destination="TLM-GN-A7L" id="xdm-tD-9L4"/>
+                <outlet property="expression" destination="SV6-z4-5UW" id="jqx-Yr-Jp6"/>
+                <outlet property="front" destination="VHy-8C-4xj" id="IaK-JU-rPa"/>
+                <outlet property="head" destination="xtt-jk-7v4" id="mFh-Fn-2DD"/>
+                <outlet property="outline" destination="X4n-Kc-bSq" id="Hwz-xI-N1i"/>
+            </connections>
+            <point key="canvasLocation" x="25.362318840579711" y="155.69196428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="b00" width="84" height="98.5"/>
+        <image name="e00" width="84" height="98.5"/>
+        <image name="f00" width="84" height="98.5"/>
+        <image name="head" width="84" height="98.5"/>
+        <image name="o00" width="84" height="98.5"/>
+    </resources>
+</document>
