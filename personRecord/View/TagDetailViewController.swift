@@ -74,7 +74,11 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         let person = self.category?.personCategory[indexPath.row].person!
         
-        let fileURL = URL(string: person!.faceImageFilepath)
+        //PersonImageのパス読み込み
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
+        //URL型にキャスト
+        let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
+        
         let filePath = fileURL?.path
         
         let state = UIControl.State.normal

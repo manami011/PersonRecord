@@ -20,6 +20,16 @@ extension UIColor{
     }
 }
 
+extension ViewController: UITextViewDelegate{
+    
+    func textViewDidChange(_ textView: UITextView) {
+    
+        let height = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat.greatestFiniteMagnitude)).height
+        textView.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    
+}
+
 extension TagListView{
     
     //TagListViewの見た目カスタマイズ
@@ -138,20 +148,19 @@ extension UIImage{
     //Imageをファイルに保存
     class func ImagefileSave(person: Person, faceImage: UIImage){
     // ドキュメントディレクトリの「ファイルURL」（URL型）定義
-    var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     // ドキュメントディレクトリの「パス」（String型）定義
     let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
     let realm = try! Realm()
     
-    
     let filename = person.name + String(person.id)
         
          // DocumentディレクトリのfileURLを取得
          if documentDirectoryFileURL != nil {
              // ディレクトリのパスにファイル名をつなげてファイルのフルパスを作る
-             let path = documentDirectoryFileURL.appendingPathComponent(filename)
+            let path = documentDirectoryFileURL.appendingPathComponent(filename)
              documentDirectoryFileURL = path
          }
         
@@ -168,7 +177,7 @@ extension UIImage{
         //②「Documents下のパス情報をRealmに保存する」
         try! realm.write(){
             
-            person.faceImageFilepath = "\(documentDirectoryFileURL)"
+            person.faceImageFilepath = "\(filename)"
             realm.add(person)
         }
             

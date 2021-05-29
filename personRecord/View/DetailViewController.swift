@@ -25,6 +25,8 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
     
     @IBOutlet weak var tagListView: TagListView!
     
@@ -39,13 +41,16 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        print("print(person) \(String(describing: person))")
+        print("print(person) \(String(describing: person!.name))")
         
         tagListView.delegate = self
         
-        setUpView()
+        updateLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setUpView()
+    }
     
     @IBAction func EditingPerson(_ sender: Any) {
         
@@ -75,27 +80,37 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         nameButton.setTitle(person!.name, for: state)
         UILabel.CustomUILabel(label: memo1Label)
         UILabel.CustomUILabel(label: memo2Label)
+        
         PreCreateTagLabel()
         TagListView.CustomTagListView(tagListView: tagListView)
         // タグの削除ボタンを有効に
         tagListView.enableRemoveButton = false
+        tagListView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
+        
+        updateLayout()
     }
     
     
     
     func FaceImageLoad(){
         //PersonImageのパス読み込み
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
         //URL型にキャスト
-        let fileURL = URL(string: person!.faceImageFilepath)
-        //パス型に変換
-        let filePath = fileURL?.path
-        personImage.image = UIImage(contentsOfFile: filePath!)
+        let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
         
-        print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
+        //パス型に変換
+        if let filePath = fileURL?.path{
+            
+            personImage.image = UIImage(contentsOfFile: filePath)
+            
+            print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
+        }
     }
     
-    //今までのCategoryタグを作る
+    //登録してあるCategoryタグを作る
     func PreCreateTagLabel(){
+        
+        
         
         if self.person!.personCategory.count == 0{
             print("Categoryは０件です")
@@ -104,15 +119,36 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         
         for count in 0...person!.personCategory.count-1{
             
-            //カテゴリーのデータを取り出してカテゴリータグを生成
-            let tagView = self.tagListView.addTag(self.person!.personCategory[count].category!.categoryName)
-            tagView.isSelected = false
-            
+            if self.person!.personCategory[count].category != nil{
+                //カテゴリーのデータを取り出してカテゴリータグを生成
+                let tagView = self.tagListView.addTag(self.person!.personCategory[count].category!.categoryName)
+                tagView.isSelected = false
+                
+            }else{
+                //カテゴリーが別のところで削除された場合、.person.personCategory.categoryが nilになる
+                print("削除されたカテゴリーが含まれています")
+            }
         }
     }
     
     
-    
+    //Viewのサイズを調整する
+    func updateLayout(){
+        
+        // タグ全体の高さを取得
+        tagListView.frame.size = tagListView.intrinsicContentSize
+        
+        //メモラベルの高さを取得
+        let memo1height = memo1Label.frame.size.height
+        let memo2height = memo2Label.frame.size.height
+        //let orijinheight = self.view.frame.size.height
+        //let orijinwidth = self.view.frame.size.width
+        
+        
+        contentView.frame.size.height = 850
+        let contentHeight = contentView.frame.size.height + memo1height + memo2height
+        scrollView.contentSize = CGSize(width: scrollView.frame.width , height: contentHeight)
+    }
     
     
     /*

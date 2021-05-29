@@ -47,6 +47,28 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
         
         categorySearchResult = realm.objects(Category.self)
         setTextField()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        FaceImageLoad()
+    }
+    
+    func FaceImageLoad(){
+        //PersonImageのパス読み込み
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
+        //URL型にキャスト
+        let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
+        
+        if let filePath = fileURL?.path{
+            
+            //パス型に変換
+            memoView.personImage.image = UIImage(contentsOfFile: filePath)
+            
+            print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
+        }
+       
     }
     
     //DetailVCから遷移してきた時用に値をセットする
@@ -76,16 +98,8 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
         
     }
     
-    //subviewのレイアウトが完了した際に呼ばれるメソッド
-    override func viewDidLayoutSubviews(){
-        //PreCreateTagLabel()
-    }
+
     
-    override func viewWillLayoutSubviews(){
-        //画面のサイズ変更をするときはここに書く
-        //PreCreateTagLabel()
-    }
- 
     
     
     @objc func saveMemo() {

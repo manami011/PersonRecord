@@ -5,6 +5,7 @@
 //  Created by 竹内愛実 on 2021/05/24.
 //
 
+
 import UIKit
 
 class NameLabelView: UIView {

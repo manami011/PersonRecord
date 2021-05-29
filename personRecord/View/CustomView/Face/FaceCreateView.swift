@@ -10,15 +10,21 @@ import UIKit
 class FaceCreateView: UIView {
     
     //似顔絵
+    //後ろ髪、輪郭、前髪
     @IBOutlet weak var back: UIImageView!
     @IBOutlet weak var outline: UIImageView!
-    @IBOutlet weak var head: UIImageView!
     @IBOutlet weak var front: UIImageView!
+    
+    //眉、口（表情）
     @IBOutlet weak var expression: UIImageView!
+    
+    //メガネ、ほくろ、ひげ
+    @IBOutlet weak var glasses: UIImageView!
+    @IBOutlet weak var hokuro: UIImageView!
+    @IBOutlet weak var beard: UIImageView!
     
     
     //ボタン
-    
     @IBOutlet weak var nameButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     

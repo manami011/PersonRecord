@@ -8,33 +8,49 @@
 import UIKit
 import RealmSwift
 
-/*
-protocol Face4Delegate: class {
-    func sliderValueChanged(colorNumber: Int)
-}
- */
-
+//色
 class FaceCreate4ViewController: UIViewController {
     
-    //weak var delegate: Face4Delegate?
-
     var person: Person?
     var personCategory: PersonCategory?
     let realm = try! Realm()
     
+    weak var delegate: Mochi?
+    
     @IBOutlet weak var faceCreateView: FaceCreateView!
     
-    //Imageの管理
+    //Imageの管理----------------
+    //髪、輪郭
     var backNumber = 0
     var frontNumber = 0
     var outlineNumber = 0
+    
     var expressionNumber = 0
     
-    //色の管理
-    var backcolorNumber = 0
-    var frontcolorNumber = 0
+    //眉毛,口
+    var eyebrowsNumber = 0
+    var mouthNumber = 0
+    
+    //ひげ,メガネ,ほくろ
+    var beardNumber = 0
+    var glassesNumber = 0
+    var hokuroNumber = 0
+    
+    
+    //色の管理（色が変えられるもの）-------------------
+    
+    //髪の毛、肌
+    var haircolorNumber = 0
     var outlinecolorNumber = 0
-    var expressioncolorNumber = 0
+    
+    //眉毛
+    var eyebrowscolorNumber = 0
+    
+    //ひげ、メガネ
+    var beardcolorNumber = 0
+    var glassescolorNumber = 0
+ 
+    //-----------------------
     
     
     
@@ -47,26 +63,58 @@ class FaceCreate4ViewController: UIViewController {
         DispatchQueue.main.async {
                    self.view.backgroundColor = UIColor.MyTheme.backgroundColor
                }
-       
+        faceViewCreate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        FaceReLoad()
+    }
+    
+    //FaceViewの使用に必要なメソッドをまとめる
+    func faceViewCreate(){
+        
+        setUpfaceCreateView()
+        setUpSlider()
+    }
+
     
     //他タブバーからの切り替え時に変更を反映する
-    func FaceReLoad(){
-        faceCreateView.back.image = UIImage(named: "b\(backNumber)\(backcolorNumber)")
-        faceCreateView.outline.image = UIImage(named: "o\(backNumber)\(backcolorNumber)")
-        faceCreateView.front.image = UIImage(named: "f\(backNumber)\(backcolorNumber)")
-        faceCreateView.expression.image = UIImage(named: "e\(backNumber)\(backcolorNumber)")
+    @objc func FaceReLoad(){
+        
+        if faceCreateView == nil{
+            print("faceCreateViewはnilです")
+            return
+        }
+        
+        print("DEBUG_PRINT:face4.backimage:\(String(describing: faceCreateView.back.image) )")
+        
+        
+        
+        //前髪、輪郭、後ろ髪
+        faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
+        faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
+        faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
+        
+        //眉毛、口（表情）
+        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        
+        //ひげ、ほくろ、メガネ
+        faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
+        faceCreateView.glasses.image = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")
+        faceCreateView.hokuro.image = UIImage(named: "h\(hokuroNumber)")
     }
     
     
     func setUpSlider(){
         //スライダーの割り当て
+        //髪の色
         faceCreateView.slider1.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
+        //目の色
         faceCreateView.slider2.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
+        //肌の色
         faceCreateView.slider3.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
-        
-        faceCreateView.slider4.isHidden = true
+        //ひげの色？
+        faceCreateView.slider4.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
     }
     
     
@@ -81,37 +129,40 @@ class FaceCreate4ViewController: UIViewController {
         let state = UIControl.State.normal
         faceCreateView.nameButton.setTitle(person!.name, for: state)
         
-        faceCreateView.back.image = UIImage(named: "b\(backNumber)\(backcolorNumber)")
+        faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
-        faceCreateView.head.image = UIImage(named: "head")
-        faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(frontcolorNumber)")
-        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)\(expressioncolorNumber)")
+        faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
+        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        
+        faceCreateView.glasses.image = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")
+        faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
+        faceCreateView.hokuro.image = UIImage(named: "h\(hokuroNumber)")
         
         faceCreateView.saveButton.addTarget(self, action: #selector(SaveFace), for: UIControl.Event.touchUpInside)
         
     }
     
-    //スライダーの値を取れるようにする。
+    //スライダーのつまみを動かした時に呼ばれる
     @objc func sliderValue(_sender: UISlider!){
         
         if _sender == faceCreateView.slider1{
-            
-            frontNumber = Int(faceCreateView.slider1.value)
-            faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(frontcolorNumber)")
+            //髪の色
+            haircolorNumber = Int(faceCreateView.slider1.value)
+            faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
+            faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
             
             print("slider1が動いた！")
             
         }else if _sender == faceCreateView.slider2{
+            //目の色
             
-            backNumber = Int(faceCreateView.slider2.value)
-            faceCreateView.front.image = UIImage(named: "b\(backNumber)\(backcolorNumber)")
             
             print("slider2が動いた！")
             
         }else if _sender == faceCreateView.slider3{
-            
-            outlineNumber = Int(faceCreateView.slider3.value)
-            faceCreateView.front.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
+            //肌の色
+            outlinecolorNumber = Int(faceCreateView.slider3.value)
+            faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
             
             print("slider3が動いた！")
             
@@ -119,26 +170,17 @@ class FaceCreate4ViewController: UIViewController {
             
             print("slider4が動いた！")
             
-        }else{
-            print("どのsliderでもありません。")
-        }
-    }
-    
-    @IBAction func eyeColorChange(_ sender: Any) {
-    }
-    
-    //髪の色
-    @IBAction func hairColorChange(_ sender: Any) {
-        backcolorNumber = Int(faceCreateView.slider2.value)
-        faceCreateView.back.image = UIImage(named: "b\(backNumber)\(backcolorNumber)")
-        
-        if let face1vc = tabBarController?.viewControllers?[0] as? FaceCreateViewController{
-            face1vc.backcolorNumber = backcolorNumber
-            face1vc.FaceReLoad()
         }
         
-        
+        sliderMove()
     }
+    
+    func sliderMove(){
+        
+        print("face4.sliderMove呼ばれた")
+        return self.delegate!.sliderMove(back: backNumber, front: frontNumber, outline: outlineNumber, expression: expressionNumber, glasses: glassesNumber, hokuro: hokuroNumber, beard: beardNumber, haircolor: haircolorNumber, outlinecolor: outlinecolorNumber, glassescolor: glassescolorNumber, beardcolor: beardcolorNumber)
+       }
+   
  
     
     //全体を保存
@@ -150,8 +192,17 @@ class FaceCreate4ViewController: UIViewController {
             self.person!.outlineNumber = outlineNumber
             self.person!.frontNumber = frontNumber
             
+            self.person!.exprassionNumber = expressionNumber
+            
+            self.person!.beardNumber = beardNumber
+            self.person!.glassesNumber = glassesNumber
+            self.person!.hokuroNumber = hokuroNumber
+            
             //カラー番号
-            self.person!.backcolorNumber = backcolorNumber
+            self.person!.haircolorNumber = haircolorNumber
+            self.person!.beardcolorNumber = beardcolorNumber
+            self.person!.glassescolorNumber = glassesNumber
+            
             self.realm.add(self.person!, update: .modified)
         }
         
@@ -178,20 +229,32 @@ class FaceCreate4ViewController: UIViewController {
     
     func ResizeÜIImage() -> [UIImage]{
         
-        let backImage = UIImage(named: "b\(backNumber)\(backcolorNumber)")!
+        let backImage = UIImage(named: "b\(backNumber)\(haircolorNumber)")!
         let outlineImage = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")!
-        let frontImage = UIImage(named: "f\(frontNumber)\(frontcolorNumber)")!
-        let expressionImage = UIImage(named: "e\(expressionNumber)\(expressioncolorNumber)")!
-        let headImage = UIImage(named: "head")!
+        let frontImage = UIImage(named: "f\(frontNumber)\(haircolorNumber)")!
+        let expressionImage = UIImage(named: "e\(expressionNumber)")!
+        
+        let beardImage = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")!
+        let glassesImage = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")!
+        let hokuroImage = UIImage(named: "h\(hokuroNumber)")!
+        
         
         let newbackImage = UIImage.ResizeÜIImage(image:backImage, width: 250, height: 300)
         let newoutlineImage = UIImage.ResizeÜIImage(image:outlineImage, width: 250, height: 300)
-        let newheadImage = UIImage.ResizeÜIImage(image:headImage, width: 250, height: 300)
+        
         let newfrontImage = UIImage.ResizeÜIImage(image:frontImage, width: 250, height: 300)
         let newexpressionImage = UIImage.ResizeÜIImage(image:expressionImage, width: 250, height: 300)
         
-        return [newbackImage!, newheadImage!, newoutlineImage!, newfrontImage!, newexpressionImage!]
+        let newbeardImage = UIImage.ResizeÜIImage(image:beardImage, width: 250, height: 300)
+        let newglassesImage = UIImage.ResizeÜIImage(image:glassesImage, width: 250, height: 300)
+        let newhokuroImage = UIImage.ResizeÜIImage(image:hokuroImage, width: 250, height: 300)
+        
+        return [newbackImage!, newoutlineImage!, newfrontImage!, newexpressionImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
     }
+    
+    
+    
+    
     
 
     /*

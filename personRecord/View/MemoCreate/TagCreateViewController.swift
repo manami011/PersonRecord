@@ -38,35 +38,83 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         view.backgroundColor = UIColor.MyTheme.backgroundColor
         
         // Do any additional setup after loading the view.
-        setUpfaceCreateView()
+        personSearchResult = realm.objects(Person.self)
+        personCategoryResult = realm.objects(PersonCategory.self)
+        categorySearchResult = realm.objects(Category.self)
         
-        PreCreateTagLabel()
+        setUpfaceCreateView()
         
         memoView.saveButton.isHidden = true
         
         tagListView.delegate = self
         
         TagListView.CustomTagListView(tagListView: tagListView)
-        personSearchResult = realm.objects(Person.self)
-        personCategoryResult = realm.objects(PersonCategory.self)
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        SetTag()
+        FaceImageLoad()
     }
     
     
+    
     //DetailVCから遷移してきた用の値セット
-    func setTag(){
+    func SetTag(){
         
-        if self.person!.personCategory[0].category != nil{
+        //タグを全て消去
+        tagListView.removeAllTags()
+        
+        
+        //カテゴリーのデータが存在したら
+        if self.person!.personCategory.count != 0{
+            
             
             //現在のpersonのpersonCategoryに絞り込む
             let personResult = realm.objects(PersonCategory.self).filter("person.id == %@", self.person!.id)
             
-            for i in 0...personResult.count-1{
+            
+            for allCategory in self.categorySearchResult!{
                 
+                //全てのカテゴリータグを作る
+                let tagView = self.tagListView.addTag(allCategory.categoryName)
+                tagView.tagBackgroundColor = UIColor.white
+                tagView.isSelected = false
+                tagView.onTap = {
+                    tagView in
+                    self.tagPressed(title: allCategory.categoryName, tagView: tagView, sender: self.tagListView, category: allCategory)
+                }
                 
-                
+                for haveCategory in personResult{
+                    
+                    if haveCategory.category == nil{
+                        print("haveCategoryはnilです。")
+                       
+                    }else if allCategory.categoryName == haveCategory.category?.categoryName{
+                        //personが持っているタグのフラグを変える
+                        //色付きタグにする
+                        
+                        tagView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
+                        tagView.isSelected = true
+                        print("DEBUG_PRINT:持ってるカテゴリー：\(allCategory.categoryName)")
+                        
+                    }
+                }
             }
-            
-            
+        }else{
+            for allCategory in self.categorySearchResult!{
+                
+                //全てのカテゴリータグを作る
+                let tagView = self.tagListView.addTag(allCategory.categoryName)
+                tagView.tagBackgroundColor = UIColor.white
+                tagView.isSelected = false
+                tagView.onTap = {
+                    tagView in
+                    self.tagPressed(title: allCategory.categoryName, tagView: tagView, sender: self.tagListView, category: allCategory)
+                }
+            }
         }
         
     }
@@ -82,6 +130,18 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         let state = UIControl.State.normal
         memoView.nameButton.setTitle(person!.name, for: state)
         memoView.personImage.image = image
+    }
+    
+    func FaceImageLoad(){
+        //PersonImageのパス読み込み
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
+        //URL型にキャスト
+        let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
+        //パス型に変換
+        if let filePath = fileURL?.path{
+            memoView.personImage.image = UIImage(contentsOfFile: filePath)
+            print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
+        }
     }
     
 
@@ -132,8 +192,6 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
                         
                         realm.add(category)
                         realm.add(self.person!)
-                        
-                        print("personCategory:\(category.personCategory[0])")
                     }
                     
                     //タグリスト作成
@@ -150,27 +208,7 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         self.present(alert, animated: true, completion: nil)
     }
     
-    //今までのCategoryタグを作る
-    func PreCreateTagLabel(){
-        
-        categorySearchResult = realm.objects(Category.self)
-        
-        if categorySearchResult?.count == 0{
-            print("Categoryは０件です")
-            return
-        }
-        
-        for count in 0...categorySearchResult!.count-1{
-            
-            //カテゴリーのデータを取り出してカテゴリータグを生成
-            let tagView = self.tagListView.addTag(categorySearchResult![count].categoryName)
-            tagView.isSelected = false
-            tagView.onTap = {
-                tagView in
-                self.tagPressed(title: self.categorySearchResult![count].categoryName, tagView: tagView, sender: self.tagListView, category: self.categorySearchResult![count])
-            }
-        }
-    }
+
     
     //タグがタップされた時の挙動
     private func tagPressed(title: String, tagView: TagView, sender: TagListView, category: Category) {
@@ -239,6 +277,28 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
     }
     
     
+    //
+    //    //今までのCategoryタグを作る
+    //    func PreCreateTagLabel(){
+    //
+    //        categorySearchResult = realm.objects(Category.self)
+    //
+    //        if categorySearchResult?.count == 0{
+    //            print("Categoryは０件です")
+    //            return
+    //        }
+    //
+    //        for count in 0...categorySearchResult!.count-1{
+    //
+    //            //カテゴリーのデータを取り出してカテゴリータグを生成
+    //            let tagView = self.tagListView.addTag(categorySearchResult![count].categoryName)
+    //            tagView.isSelected = false
+    //            tagView.onTap = {
+    //                tagView in
+    //                self.tagPressed(title: self.categorySearchResult![count].categoryName, tagView: tagView, sender: self.tagListView, category: self.categorySearchResult![count])
+    //            }
+    //        }
+    //    }
     
     /*
      // MARK: - Navigation

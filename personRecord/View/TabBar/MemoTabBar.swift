@@ -18,7 +18,7 @@ class MemoTabBar: UITabBarController, UITabBarControllerDelegate {
         UITabBar.appearance().tintColor = UIColor.MyTheme.iconColor
         UITabBar.appearance().barTintColor = UIColor.MyTheme.tabBarColor
         
-        //self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
     }
     
 
