@@ -12,7 +12,8 @@ import TagListView
 
 class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFieldDelegate{
     
-    @IBOutlet weak var memoView: MemoView!
+    @IBOutlet weak var nameButton: UIButton!
+    @IBOutlet weak var personImage: UIImageView!
     
     @IBOutlet weak var tagListView: TagListView!
     
@@ -44,7 +45,7 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         
         setUpfaceCreateView()
         
-        memoView.saveButton.isHidden = true
+        
         
         tagListView.delegate = self
         
@@ -122,14 +123,10 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
     //faceCreateViewの準備
     func setUpfaceCreateView(){
         
-        let nib = UINib(nibName: "MemoView", bundle: nil)
-        memoView = nib.instantiate(withOwner: self, options: nil).first as? MemoView
-        
-        self.view.addSubview(memoView)
         
         let state = UIControl.State.normal
-        memoView.nameButton.setTitle(person!.name, for: state)
-        memoView.personImage.image = image
+        nameButton.setTitle(person!.name, for: state)
+        personImage.image = image
     }
     
     func FaceImageLoad(){
@@ -139,7 +136,7 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
         //パス型に変換
         if let filePath = fileURL?.path{
-            memoView.personImage.image = UIImage(contentsOfFile: filePath)
+            personImage.image = UIImage(contentsOfFile: filePath)
             print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
         }
     }
@@ -208,7 +205,6 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         self.present(alert, animated: true, completion: nil)
     }
     
-
     
     //タグがタップされた時の挙動
     private func tagPressed(title: String, tagView: TagView, sender: TagListView, category: Category) {
@@ -244,13 +240,14 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
             tagView.tagBackgroundColor = UIColor.white
             tagView.isSelected = false
             
-            for i in 0...personCategoryResult!.count-1{
+            for i in 0...self.person!.personCategory.count-1{
                 
-                let personCategory = personCategoryResult![i]
+                let personCategory = self.person!.personCategory[i]
+                print("DEBUG_PRINT:\(String(describing: personCategoryResult))")
                 
-                if personCategory.person!.id == self.person!.id && personCategory.category?.categoryName == category.categoryName{
+                if personCategory.category?.categoryName == title{
                     
-                    print("このカテゴリーを削除します！：「\(personCategory)」")
+                    print("DEBUG_PRINT:このカテゴリーを削除します！：「\(personCategory)」")
                     
                     try! realm.write(){
                         realm.delete(personCategory)
@@ -260,6 +257,60 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
             print("選択が解除されました")
         }
     }
+
+
+    
+//    //タグがタップされた時の挙動
+//    private func tagPressed(title: String, tagView: TagView, sender: TagListView, category: Category) {
+//        print("Tag pressed: \(title), \(sender)")
+//
+//        tagView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
+//        personCategoryResult = realm.objects(PersonCategory.self)
+//
+//
+//        if tagView.isSelected == false{
+//            //非選択状態の挙動
+//            tagView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
+//            tagView.isSelected = true
+//
+//            try! realm.write(){
+//
+//                let personCategory = PersonCategory()
+//                personCategory.category = category
+//                personCategory.person = self.person
+//                category.categoryName = title
+//
+//                category.personCategory.append(personCategory)
+//                self.person!.personCategory.append(personCategory)
+//
+//                realm.add(category)
+//                realm.add(self.person!)
+//
+//            }
+//            print("選択されました")
+//
+//        }else{
+//            //選択状態の挙動
+//            tagView.tagBackgroundColor = UIColor.white
+//            tagView.isSelected = false
+//
+//            for i in 0...self.person!.personCategory.count-1{
+//
+//                let personCategory = self.person!.personCategory[i]
+//                print("DEBUG_PRINT:\(String(describing: personCategoryResult))")
+//
+//                if personCategory.person!.id == self.person!.id && personCategory.category?.categoryName == category.categoryName{
+//
+//                    print("DEBUG_PRINT:このカテゴリーを削除します！：「\(personCategory)」")
+//
+//                    try! realm.write(){
+//                        realm.delete(personCategory)
+//                    }
+//                }
+//            }
+//            print("選択が解除されました")
+//        }
+//    }
     
  
     
@@ -269,6 +320,16 @@ class TagCreateViewController: UIViewController, TagListViewDelegate, UITextFiel
         sender.removeTagView(tagView)
         
         try! realm.write(){
+            
+            let deleteCategory = realm.objects(Category.self).filter("categoryName == %@", title).first
+            
+            //削除対象のカテゴリーを含んでいるpersonの参照を切る
+//            for i in 0...deleteCategory!.personCategory.count-1{
+//                print("DEBUG_PRINT:personCategoryResult.count:\(i)")
+                
+                realm.delete(deleteCategory!.personCategory)
+           //}
+            
             realm.delete(realm.objects(Category.self).filter("categoryName == %@", title))
         }
         

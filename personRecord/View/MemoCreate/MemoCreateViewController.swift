@@ -9,16 +9,21 @@ import UIKit
 import RealmSwift
 import TagListView
 
-class MemoCreateViewController: UIViewController, UITextFieldDelegate{
+class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     
     let MARGIN: CGFloat = 10
+    var isObserving = false //キーボード入力時のTextView浮き上がり処理
     
     var image: UIImage!
-   
-
-    @IBOutlet weak var memoView: MemoView!
+    @IBOutlet weak var personImage: UIImageView!
+    
+    @IBOutlet weak var nameButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    
     @IBOutlet weak var memo1TextField: UITextField!
     @IBOutlet weak var memo2TextView: UITextView!
+    
+    @IBOutlet weak var memo2TextViewHeight: NSLayoutConstraint!
     
     
     var person: Person?
@@ -48,12 +53,108 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
         categorySearchResult = realm.objects(Category.self)
         setTextField()
         
+        memo1TextField.delegate = self
+        memo2TextView.delegate = self
+        CreateToolBar()
     }
     
+    //ツールバー生成
+    func CreateToolBar(){
+        // ツールバー生成 サイズはsizeToFitメソッドで自動で調整される。
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        //サイズの自動調整。敢えて手動で実装したい場合はCGRectに記述してsizeToFitは呼び出さない。
+        toolBar.sizeToFit()
+        
+        // 左側のBarButtonItemはflexibleSpace。これがないと右に寄らない。
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        // Doneボタン
+        let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(commitButtonTapped))
+        
+        // BarButtonItemの配置
+        toolBar.items = [spacer, commitButton]
+        // textViewのキーボードにツールバーを設定
+        memo1TextField.inputAccessoryView = toolBar
+        memo2TextView.inputAccessoryView = toolBar
+    }
+    
+    //Doneボタン押下時の処理
+    @objc func commitButtonTapped() {
+        self.view.endEditing(true)
+    }
+    
+    //TextView以外にタッチした時にキーボードを閉じる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        // Viewの表示時にキーボード表示・非表示を監視するObserverを登録する
+        super.viewWillAppear(animated)
+        if(!isObserving) {
+            let notification = NotificationCenter.default
+            notification.addObserver(self, selector:#selector(keyboardWillShow)
+                                     , name: UIResponder.keyboardWillShowNotification, object: nil)
+            notification.addObserver(self, selector:#selector(keyboardWillHide)
+                                     , name: UIResponder.keyboardWillHideNotification, object: nil)
+            isObserving = true
+        }
         
         FaceImageLoad()
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Viewの表示時にキーボード表示・非表示時を監視していたObserverを解放する
+        super.viewWillDisappear(animated)
+        if(isObserving) {
+            let notification = NotificationCenter.default
+            notification.removeObserver(self)
+            notification.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            notification.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+            isObserving = false
+        }
+    }
+    
+    //キーボードを閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // キーボードを閉じる
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let maxHeight = 80.0  // 入力フィールドの最大サイズ
+        if(memo2TextView.frame.size.height.native < maxHeight) {
+            let size:CGSize = memo2TextView.sizeThatFits(memo2TextView.frame.size)
+            memo2TextViewHeight.constant = size.height
+        }
+    }
+    
+    
+    @objc func keyboardWillShow(notification: NSNotification?) {
+        // キーボード表示時の動作をここに記述する
+        let rect = ((notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey])! as! NSValue).cgRectValue
+        let duration:TimeInterval = (notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey])! as! Double
+        UIView.animate(withDuration: duration, animations: {
+            let transform = CGAffineTransform(translationX: 0, y: -rect.size.height)
+            self.view.transform = transform
+        },completion:nil)
+    }
+    @objc func keyboardWillHide(notification: NSNotification?) {
+        // キーボード消滅時の動作をここに記述する
+        let duration = ((notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey])! as! Double)
+        UIView.animate(withDuration: duration, animations:{
+            self.view.transform = .identity
+        },
+        completion:nil)
+    }
+    
+    /*
+     // MARK: -Face
+     */
     
     func FaceImageLoad(){
         //PersonImageのパス読み込み
@@ -64,11 +165,11 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
         if let filePath = fileURL?.path{
             
             //パス型に変換
-            memoView.personImage.image = UIImage(contentsOfFile: filePath)
+            personImage.image = UIImage(contentsOfFile: filePath)
             
             print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
         }
-       
+        
     }
     
     //DetailVCから遷移してきた時用に値をセットする
@@ -85,21 +186,12 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
     //faceCreateViewの準備
     func setUpfaceCreateView(){
         
-        let nib = UINib(nibName: "MemoView", bundle: nil)
-        memoView = nib.instantiate(withOwner: self, options: nil).first as? MemoView
-        
-        self.view.addSubview(memoView)
-        
         let state = UIControl.State.normal
-        memoView.nameButton.setTitle(person!.name, for: state)
-        memoView.personImage.image = image
+        nameButton.setTitle(person!.name, for: state)
+        personImage.image = image
         
-        memoView.saveButton.addTarget(self, action: #selector(saveMemo), for: UIControl.Event.touchUpInside)
-        
+        saveButton.addTarget(self, action: #selector(saveMemo), for: UIControl.Event.touchUpInside)
     }
-    
-
-    
     
     
     @objc func saveMemo() {
@@ -119,61 +211,61 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate{
     
     
     
-  
-    
-//
-//    //半透明のボタンをタップするとpersonCategoryにcategoryを追加する
-//
-//    @objc func tagEvent(_ sender: UIButton){
-//
-//
-//        let button = (sender as UIButton)
-//        let text = sender.currentTitle
-//        print("DEBUG_PRINT:customViewがタップされました！\(String(describing: text))")
-//
-//        //フラグがtrue=選択済みのものを再度タップされたら
-//        if isSelected {
-//            let image = UIImage(named: "UI15")
-//            let state = UIControl.State.normal
-//            button.setImage(image, for: state)
-//
-//            //Realmから削除
-//        }else{
-//            isSelected = true
-//            let image = UIImage(named: "UI16")
-//            let state = UIControl.State.normal
-//            button.setImage(image, for: state)
-//            //Realmに追加
-//        }
-//
-//        //deleteButtonを有効にする
-//
-//        try! realm.write(){
-//
-//            personCategory!.category = category
-//            category!.categoryName = (sender.titleLabel?.text)!
-//            print("\(category!.categoryName)")
-//            self.person!.personCategory.append(personCategory!)
-//
-//            realm.add(personCategory!.self)
-//        }
-//    }
     
     
-//    //タグの削除(deleteButtonをタップ)
-//
-//    @objc func tapped(_ sender: UIButton){
-//
-//        //TODO:タグ名の取得->personの所持カテゴリー名と一致するrealmデータを削除
-//        //true　false入れ替え？（タグは存在させたい）
-//
-//
-//        try! realm.write(){
-//
-//            //realm.delete(<#T##object: ObjectBase##ObjectBase#>)
-//        }
-//        print("タグの削除ボタンがタップされました。")
-//    }
+    //
+    //    //半透明のボタンをタップするとpersonCategoryにcategoryを追加する
+    //
+    //    @objc func tagEvent(_ sender: UIButton){
+    //
+    //
+    //        let button = (sender as UIButton)
+    //        let text = sender.currentTitle
+    //        print("DEBUG_PRINT:customViewがタップされました！\(String(describing: text))")
+    //
+    //        //フラグがtrue=選択済みのものを再度タップされたら
+    //        if isSelected {
+    //            let image = UIImage(named: "UI15")
+    //            let state = UIControl.State.normal
+    //            button.setImage(image, for: state)
+    //
+    //            //Realmから削除
+    //        }else{
+    //            isSelected = true
+    //            let image = UIImage(named: "UI16")
+    //            let state = UIControl.State.normal
+    //            button.setImage(image, for: state)
+    //            //Realmに追加
+    //        }
+    //
+    //        //deleteButtonを有効にする
+    //
+    //        try! realm.write(){
+    //
+    //            personCategory!.category = category
+    //            category!.categoryName = (sender.titleLabel?.text)!
+    //            print("\(category!.categoryName)")
+    //            self.person!.personCategory.append(personCategory!)
+    //
+    //            realm.add(personCategory!.self)
+    //        }
+    //    }
+    
+    
+    //    //タグの削除(deleteButtonをタップ)
+    //
+    //    @objc func tapped(_ sender: UIButton){
+    //
+    //        //TODO:タグ名の取得->personの所持カテゴリー名と一致するrealmデータを削除
+    //        //true　false入れ替え？（タグは存在させたい）
+    //
+    //
+    //        try! realm.write(){
+    //
+    //            //realm.delete(<#T##object: ObjectBase##ObjectBase#>)
+    //        }
+    //        print("タグの削除ボタンがタップされました。")
+    //    }
     
     /*
      // MARK: - バックアップ

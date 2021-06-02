@@ -31,6 +31,7 @@
 		C862CAD02651F7320064880B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CACF2651F7320064880B /* DetailViewController.swift */; };
 		C862CAD32651FAE30064880B /* MemoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CAD22651FAE30064880B /* MemoCreateViewController.swift */; };
 		C864D0462652584F00E41849 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C864D0452652584F00E41849 /* Extension.swift */; };
+		C8761A3B2665DC8B00030024 /* KeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8761A3A2665DC8B00030024 /* KeyBoard.swift */; };
 		C87E20CA265F21DF0023BDE3 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87E20C9265F21DF0023BDE3 /* MemoView.swift */; };
 		C87E20D3265F220C0023BDE3 /* MemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C87E20D2265F220C0023BDE3 /* MemoView.xib */; };
 		C881B7A9265CDE9600709097 /* CategoryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C881B7A8265CDE9600709097 /* CategoryLabel.swift */; };
@@ -87,6 +88,7 @@
 		C862CACF2651F7320064880B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C862CAD22651FAE30064880B /* MemoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCreateViewController.swift; sourceTree = "<group>"; };
 		C864D0452652584F00E41849 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		C8761A3A2665DC8B00030024 /* KeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoard.swift; sourceTree = "<group>"; };
 		C87E20C9265F21DF0023BDE3 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		C87E20D2265F220C0023BDE3 /* MemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoView.xib; sourceTree = "<group>"; };
 		C881B7A8265CDE9600709097 /* CategoryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLabel.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				C85A266D264CF5A3007B3FF0 /* Category.swift */,
 				C85A2674264D0787007B3FF0 /* PersonCategory.swift */,
 				C864D0452652584F00E41849 /* Extension.swift */,
+				C8761A3A2665DC8B00030024 /* KeyBoard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 			files = (
 				C80EA528265DCA9F00806FF6 /* costomTableViewCell.swift in Sources */,
 				C881B7A9265CDE9600709097 /* CategoryLabel.swift in Sources */,
+				C8761A3B2665DC8B00030024 /* KeyBoard.swift in Sources */,
 				C85A2669264CF37F007B3FF0 /* Person.swift in Sources */,
 				C85A2650264A4CB5007B3FF0 /* ViewController.swift in Sources */,
 				C81E8C68265E0D1700A3F010 /* FaceCreateView.swift in Sources */,
@@ -616,6 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ip.techacademy.manami.takeuchi2.personRecord2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -636,6 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ip.techacademy.manami.takeuchi2.personRecord2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

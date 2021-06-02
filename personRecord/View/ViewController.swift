@@ -263,17 +263,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     
         if editingStyle == .delete{
+            print("[indexPath.row]: \(indexPath.row)")
             
-            //削除するタスクを取得する
-            let task = self.searchResult![indexPath.row]
+            //削除する人物を取得する
+            let person = self.searchResult![indexPath.row]
             //ローカル通知をキャンセルする
             let center = UNUserNotificationCenter.current()
-            center.removePendingNotificationRequests(withIdentifiers: [String(task.id)])
+            center.removePendingNotificationRequests(withIdentifiers: [String(person.id)])
             
+           
             //データベースから削除する
             try! realm.write{
-                self.realm.delete(self.searchResult![indexPath.row])
+                
+                //人物を削除したら、紐づくpersonCategoryも削除する
+                //let personCategory = realm.objects(PersonCategory.self)
+                for i in 0...person.personCategory.count-1{
+
+                    self.realm.delete(person.personCategory[i])
+
+                }
+                
+                self.realm.delete(person)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                
             }
         }
     }

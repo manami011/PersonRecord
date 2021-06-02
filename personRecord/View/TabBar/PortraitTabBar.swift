@@ -9,14 +9,14 @@ import UIKit
 
 @objc protocol Mochi: class{
     
-     func sliderMove(back:Int, front:Int, outline:Int, expression:Int, glasses:Int, hokuro:Int, beard:Int,
+     func sliderMove(back:Int, front:Int, outline:Int, eye:Int, eyebrows:Int, mouth:Int, glasses:Int, hokuro:Int, beard:Int,
                     haircolor:Int, outlinecolor:Int, glassescolor:Int, beardcolor:Int)
 }
 
 
 class PortraitTabBar: UITabBarController, UITabBarControllerDelegate, Mochi{
     
-    func sliderMove(back: Int, front: Int, outline: Int, expression: Int, glasses: Int, hokuro: Int, beard: Int, haircolor: Int, outlinecolor: Int, glassescolor: Int, beardcolor: Int) {
+    func sliderMove(back: Int, front: Int, outline: Int, eye:Int, eyebrows:Int, mouth:Int, glasses: Int, hokuro: Int, beard: Int, haircolor: Int, outlinecolor: Int, glassescolor: Int, beardcolor: Int) {
         
         let vc1 = self.viewControllers![0] as! FaceCreateViewController
         print("PortraitTabBar:sliderMove")
@@ -24,7 +24,11 @@ class PortraitTabBar: UITabBarController, UITabBarControllerDelegate, Mochi{
         vc1.backNumber = back
         vc1.frontNumber = front
         vc1.outlineNumber = outline
-        vc1.expressionNumber = expression
+        
+        vc1.eyeNumber = eye
+        vc1.eyebrowsNumber = eyebrows
+        vc1.mouthNumber = mouth
+        
         vc1.glassesNumber = glasses
         vc1.hokuroNumber = hokuro
         vc1.beardNumber = beard
@@ -39,7 +43,11 @@ class PortraitTabBar: UITabBarController, UITabBarControllerDelegate, Mochi{
         vc2.backNumber = back
         vc2.frontNumber = front
         vc2.outlineNumber = outline
-        vc2.expressionNumber = expression
+        
+        vc2.eyeNumber = eye
+        vc2.eyebrowsNumber = eyebrows
+        vc2.mouthNumber = mouth
+        
         vc2.glassesNumber = glasses
         vc2.hokuroNumber = hokuro
         vc2.beardNumber = beard
@@ -54,7 +62,11 @@ class PortraitTabBar: UITabBarController, UITabBarControllerDelegate, Mochi{
         vc3.backNumber = back
         vc3.frontNumber = front
         vc3.outlineNumber = outline
-        vc3.expressionNumber = expression
+        
+        vc3.eyeNumber = eye
+        vc3.eyebrowsNumber = eyebrows
+        vc3.mouthNumber = mouth
+        
         vc3.glassesNumber = glasses
         vc3.hokuroNumber = hokuro
         vc3.beardNumber = beard
@@ -69,7 +81,11 @@ class PortraitTabBar: UITabBarController, UITabBarControllerDelegate, Mochi{
         vc4.backNumber = back
         vc4.frontNumber = front
         vc4.outlineNumber = outline
-        vc4.expressionNumber = expression
+        
+        vc4.eyeNumber = eye
+        vc4.eyebrowsNumber = eyebrows
+        vc4.mouthNumber = mouth
+        
         vc4.glassesNumber = glasses
         vc4.hokuroNumber = hokuro
         vc4.beardNumber = beard

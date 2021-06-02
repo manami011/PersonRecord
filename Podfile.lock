@@ -1,34 +1,53 @@
 PODS:
   - MBProgressHUD (1.2.0)
-  - Realm (10.1.4):
-    - Realm/Headers (= 10.1.4)
-  - Realm/Headers (10.1.4)
-  - RealmSwift (10.1.4):
-    - Realm (= 10.1.4)
+  - Realm (10.7.6):
+    - Realm/Headers (= 10.7.6)
+  - Realm/Headers (10.7.6)
+  - RealmSwift (10.7.6):
+    - Realm (= 10.7.6)
   - SVProgressHUD (2.2.5)
   - TagListView (1.4.1)
 
 DEPENDENCIES:
   - MBProgressHUD (~> 1.2.0)
-  - RealmSwift (= 10.1.4)
+  - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - SVProgressHUD (= 2.2.5)
   - TagListView (~> 1.0)
 
 SPEC REPOS:
   trunk:
     - MBProgressHUD
-    - Realm
-    - RealmSwift
     - SVProgressHUD
     - TagListView
 
+EXTERNAL SOURCES:
+  Realm:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  Realm:
+    :commit: 39930fe2a8c4a207cb832ce8cf156f2e25db4f6a
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  RealmSwift:
+    :commit: 39930fe2a8c4a207cb832ce8cf156f2e25db4f6a
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+
 SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  Realm: 80f4fb2971ccb9adc27a47d0955ae8e533a7030b
-  RealmSwift: 0e566ca714edb377bba8ea0811eafcea0b93734e
+  Realm: ed860452717c8db8f4bf832b6807f7f2ce708839
+  RealmSwift: e31c4ddbcc42ac879313d656b86f9ca539f6f4f4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TagListView: a1c236d17960a0cf64156725a76ce6d73ebce2be
 
-PODFILE CHECKSUM: 00ccb973b6d77424da4aee0a2b9a7a86209af19d
+PODFILE CHECKSUM: 09626235a37b1ef7da33c9813252553adef143ba
 
 COCOAPODS: 1.10.1

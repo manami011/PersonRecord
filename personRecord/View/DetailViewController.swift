@@ -20,8 +20,8 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     @IBOutlet weak var title2Label: UILabel!
     
     //メモ内容
-    @IBOutlet weak var memo1Label: UILabel!
-    @IBOutlet weak var memo2Label: UILabel!
+    @IBOutlet weak var memo1Label: PaddingLabel!
+    @IBOutlet weak var memo2Label: PaddingLabel!
     
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -44,13 +44,14 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         print("print(person) \(String(describing: person!.name))")
         
         tagListView.delegate = self
-        
-        updateLayout()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         setUpView()
     }
+    
+    
     
     @IBAction func EditingPerson(_ sender: Any) {
         
@@ -76,18 +77,17 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         memo1Label.text = person!.memo1
         memo2Label.text = person!.memo2
         
+        
         let state = UIControl.State.normal
         nameButton.setTitle(person!.name, for: state)
-        UILabel.CustomUILabel(label: memo1Label)
-        UILabel.CustomUILabel(label: memo2Label)
+        PaddingLabel.CustomUILabel(label: memo1Label)
+        PaddingLabel.CustomUILabel(label: memo2Label)
         
         PreCreateTagLabel()
         TagListView.CustomTagListView(tagListView: tagListView)
         // タグの削除ボタンを有効に
         tagListView.enableRemoveButton = false
         tagListView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
-        
-        updateLayout()
     }
     
     
@@ -100,7 +100,6 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         
         //パス型に変換
         if let filePath = fileURL?.path{
-            
             personImage.image = UIImage(contentsOfFile: filePath)
             
             print("DEBUG_PRINT:filePath:\(String(describing: filePath))")
@@ -109,8 +108,6 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     
     //登録してあるCategoryタグを作る
     func PreCreateTagLabel(){
-        
-        
         
         if self.person!.personCategory.count == 0{
             print("Categoryは０件です")
@@ -131,24 +128,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         }
     }
     
-    
-    //Viewのサイズを調整する
-    func updateLayout(){
-        
-        // タグ全体の高さを取得
-        tagListView.frame.size = tagListView.intrinsicContentSize
-        
-        //メモラベルの高さを取得
-        let memo1height = memo1Label.frame.size.height
-        let memo2height = memo2Label.frame.size.height
-        //let orijinheight = self.view.frame.size.height
-        //let orijinwidth = self.view.frame.size.width
-        
-        
-        contentView.frame.size.height = 850
-        let contentHeight = contentView.frame.size.height + memo1height + memo2height
-        scrollView.contentSize = CGSize(width: scrollView.frame.width , height: contentHeight)
-    }
+ 
     
     
     /*

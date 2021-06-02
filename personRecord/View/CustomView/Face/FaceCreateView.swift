@@ -15,8 +15,12 @@ class FaceCreateView: UIView {
     @IBOutlet weak var outline: UIImageView!
     @IBOutlet weak var front: UIImageView!
     
-    //眉、口（表情）
-    @IBOutlet weak var expression: UIImageView!
+    //目、眉、口（表情）
+    @IBOutlet weak var eye: UIImageView!
+    @IBOutlet weak var eyebrows: UIImageView!
+    @IBOutlet weak var mouth: UIImageView!
+    
+    
     
     //メガネ、ほくろ、ひげ
     @IBOutlet weak var glasses: UIImageView!

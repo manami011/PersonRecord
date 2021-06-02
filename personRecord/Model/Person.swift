@@ -21,9 +21,10 @@ class Person: Object{
     @objc dynamic var backNumber = 0
     @objc dynamic var outlineNumber = 0
     
-    @objc dynamic var exprassionNumber = 0
+    
     
     //眉毛,口
+    @objc dynamic    var eyeNumber = 0
     @objc dynamic    var eyebrowsNumber = 0
     @objc dynamic    var mouthNumber = 0
     

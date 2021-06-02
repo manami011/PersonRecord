@@ -7,13 +7,15 @@
 
 import UIKit
 import RealmSwift
+import MBProgressHUD
+import SVProgressHUD
 
 class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
  
     @IBOutlet weak var tableView: UITableView!
     
     let realm = try! Realm()
-    var searchResult : Results<Category>?
+    var categorySearchResult : Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.delegate = self
         tableView.dataSource = self
         
-        searchResult = realm.objects(Category.self)
+        categorySearchResult = realm.objects(Category.self)
         
     }
     
@@ -40,14 +42,14 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return searchResult!.count
+        return categorySearchResult!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.contentView.backgroundColor = UIColor.MyTheme.backgroundColor
         
-        let category = searchResult![indexPath.row]
+        let category = categorySearchResult![indexPath.row]
         cell.textLabel?.text = category.categoryName
         
         return cell
@@ -58,14 +60,13 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let tagVC = self.storyboard!.instantiateViewController(identifier: "tagDetail") as! TagDetailViewController
         let indexPath = self.tableView.indexPathForSelectedRow
+        print("DEBUGPRINT:indexpath\(indexPath!.row)")
+        print("DEBUG_PRINT:searchResult![indexPath!.row] \(categorySearchResult![indexPath!.row])")
         
-        print("DEBUG_PRINT:searchResult![indexPath!.row] \(searchResult![indexPath!.row])")
         
-        tagVC.category = searchResult![indexPath!.row]
+        tagVC.category = categorySearchResult![indexPath!.row]
         
-        self.navigationController!.pushViewController(tagVC, animated: true)
-        
-       
+      self.navigationController!.pushViewController(tagVC, animated: true)
     }
     
 

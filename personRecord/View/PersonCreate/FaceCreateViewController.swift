@@ -24,9 +24,8 @@ class FaceCreateViewController: UIViewController {
     var frontNumber = 0
     var outlineNumber = 0
     
-    var expressionNumber = 0
-    
-    //眉毛,口
+    //目、眉毛,口
+    var eyeNumber = 0
     var eyebrowsNumber = 0
     var mouthNumber = 0
     
@@ -64,9 +63,7 @@ class FaceCreateViewController: UIViewController {
         //faceCreateView準備
         faceViewCreate()
         
-       
-        
-        if faceCreateView == nil{
+       if faceCreateView == nil{
             print("DEBUG_PRINT:faceCreateViewはnilです。")
             return}else{
             print("DEBUG_PRINT faceCreateViewはあります")}
@@ -90,8 +87,11 @@ class FaceCreateViewController: UIViewController {
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
         faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
         
-        //眉毛、口（表情）
-        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        //目、眉毛、口（表情）
+        faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")
+        faceCreateView.eyebrows.image = UIImage(named: "eb\(eyebrowsNumber)")
+        faceCreateView.mouth.image = UIImage(named: "m\(mouthNumber)")
+        print("mouthNumber:\(mouthNumber)")
         
         //ひげ、ほくろ、メガネ
         faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
@@ -124,11 +124,20 @@ class FaceCreateViewController: UIViewController {
         faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
         faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
-        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        
+        //目、眉毛、口（表情）
+        faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")
+        faceCreateView.eyebrows.image = UIImage(named: "eb\(eyebrowsNumber)")
+        faceCreateView.mouth.image = UIImage(named: "m\(mouthNumber)")
         
         faceCreateView.glasses.image = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")
         faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
         faceCreateView.hokuro.image = UIImage(named: "h\(hokuroNumber)")
+        
+        faceCreateView.icon1Image.image = UIImage(named: "icon1")
+        faceCreateView.icon2Image.image = UIImage(named: "icon2")
+        faceCreateView.icon3Image.image = UIImage(named: "icon3")
+        faceCreateView.icon4Image.isHidden = true
         
         faceCreateView.saveButton.addTarget(self, action: #selector(SaveFace), for: UIControl.Event.touchUpInside)
         
@@ -137,10 +146,13 @@ class FaceCreateViewController: UIViewController {
     func setUpSlider(){
         //スライダーの割り当て
         //前髪
+        faceCreateView.slider1.maximumValue = 4
         faceCreateView.slider1.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //後ろ髪
+        faceCreateView.slider2.maximumValue = 5
         faceCreateView.slider2.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //輪郭
+        faceCreateView.slider3.maximumValue = 5
         faceCreateView.slider3.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         
         faceCreateView.slider4.isHidden = true
@@ -181,7 +193,7 @@ class FaceCreateViewController: UIViewController {
     func sliderMove(){
         
         print("face4.sliderMove呼ばれた")
-        return self.delegate!.sliderMove(back: backNumber, front: frontNumber, outline: outlineNumber, expression: expressionNumber, glasses: glassesNumber, hokuro: hokuroNumber, beard: beardNumber, haircolor: haircolorNumber, outlinecolor: outlinecolorNumber, glassescolor: glassescolorNumber, beardcolor: beardcolorNumber)
+        return self.delegate!.sliderMove(back: backNumber, front: frontNumber, outline: outlineNumber, eye:eyeNumber, eyebrows:eyebrowsNumber, mouth:mouthNumber, glasses: glassesNumber, hokuro: hokuroNumber, beard: beardNumber, haircolor: haircolorNumber, outlinecolor: outlinecolorNumber, glassescolor: glassescolorNumber, beardcolor: beardcolorNumber)
        }
     
     
@@ -197,7 +209,9 @@ class FaceCreateViewController: UIViewController {
             self.person!.outlineNumber = outlineNumber
             self.person!.frontNumber = frontNumber
             
-            self.person!.exprassionNumber = expressionNumber
+            self.person!.eyeNumber = eyeNumber
+            self.person!.eyebrowsNumber = eyebrowsNumber
+            self.person!.mouthNumber = mouthNumber
             
             self.person!.beardNumber = beardNumber
             self.person!.glassesNumber = glassesNumber
@@ -246,7 +260,10 @@ class FaceCreateViewController: UIViewController {
         let backImage = UIImage(named: "b\(backNumber)\(haircolorNumber)")!
         let outlineImage = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")!
         let frontImage = UIImage(named: "f\(frontNumber)\(haircolorNumber)")!
-        let expressionImage = UIImage(named: "e\(expressionNumber)")!
+        
+        let eyeImage = UIImage(named: "eye\(eyeNumber)")!
+        let eyebrowsImage = UIImage(named: "eb\(eyebrowsNumber)")!
+        let mouthImage = UIImage(named: "m\(mouthNumber)")!
         
         let beardImage = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")!
         let glassesImage = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")!
@@ -257,13 +274,17 @@ class FaceCreateViewController: UIViewController {
         let newoutlineImage = UIImage.ResizeÜIImage(image:outlineImage, width: 250, height: 300)
         
         let newfrontImage = UIImage.ResizeÜIImage(image:frontImage, width: 250, height: 300)
-        let newexpressionImage = UIImage.ResizeÜIImage(image:expressionImage, width: 250, height: 300)
+        
+        let neweyeImage = UIImage.ResizeÜIImage(image:eyeImage, width: 250, height: 300)
+        let neweyebrowsImage = UIImage.ResizeÜIImage(image:eyebrowsImage, width: 250, height: 300)
+        let newmouthImage = UIImage.ResizeÜIImage(image:mouthImage, width: 250, height: 300)
+        
         
         let newbeardImage = UIImage.ResizeÜIImage(image:beardImage, width: 250, height: 300)
         let newglassesImage = UIImage.ResizeÜIImage(image:glassesImage, width: 250, height: 300)
         let newhokuroImage = UIImage.ResizeÜIImage(image:hokuroImage, width: 250, height: 300)
         
-        return [newbackImage!, newoutlineImage!, newfrontImage!, newexpressionImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
+        return [newbackImage!, newoutlineImage!, newfrontImage!, neweyeImage!, neweyebrowsImage!, newmouthImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
     }
   
 }

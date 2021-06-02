@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "be00.png",
+      "filename" : "nomal.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "be00@2x.png",
+      "filename" : "nomal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "be00@3x.png",
+      "filename" : "nomal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -6,7 +6,8 @@ target 'personRecord' do
   use_frameworks!
 
   # Pods for personRecord
-  pod 'RealmSwift','10.1.4'
+  pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
+  pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
   pod 'SVProgressHUD','2.2.5'
   pod 'MBProgressHUD', '~> 1.2.0'
   pod 'TagListView', '~> 1.0'

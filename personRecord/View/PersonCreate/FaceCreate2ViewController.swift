@@ -29,9 +29,8 @@ class FaceCreate2ViewController: UIViewController {
     var frontNumber = 0
     var outlineNumber = 0
     
-    var expressionNumber = 0
-    
-    //眉毛,口
+    //目、眉毛,口
+    var eyeNumber = 0
     var eyebrowsNumber = 0
     var mouthNumber = 0
     
@@ -96,8 +95,10 @@ class FaceCreate2ViewController: UIViewController {
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
         faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
         
-        //眉毛、口（表情）
-        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        //目、眉毛、口（表情）
+        faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")
+        faceCreateView.eyebrows.image = UIImage(named: "eb\(eyebrowsNumber)")
+        faceCreateView.mouth.image = UIImage(named: "m\(mouthNumber)")
         
         //ひげ、ほくろ、メガネ
         faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
@@ -109,15 +110,56 @@ class FaceCreate2ViewController: UIViewController {
     func setUpSlider(){
         //スライダーの割り当て
         //眉毛
+        faceCreateView.slider1.maximumValue = 1
         faceCreateView.slider1.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //目
+        faceCreateView.slider2.maximumValue = 3
         faceCreateView.slider2.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //口
+        faceCreateView.slider3.maximumValue = 1
         faceCreateView.slider3.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         
         faceCreateView.slider4.isHidden = true
     }
     
+    
+   
+    //スライダーの値を取れるようにする。
+    @objc func sliderValue(_sender: UISlider!){
+        
+        if _sender == faceCreateView.slider1{
+            //眉毛
+            eyebrowsNumber = Int(faceCreateView.slider1.value)
+            faceCreateView.eyebrows.image = UIImage(named: "eb\(eyebrowsNumber)")
+            
+            print("slider1が動いた！")
+            
+        }else if _sender == faceCreateView.slider2{
+            //目
+            eyeNumber = Int(faceCreateView.slider2.value)
+            faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")
+            
+            print("slider2が動いた！")
+            
+        }else if _sender == faceCreateView.slider3{
+            //口
+            mouthNumber = Int(faceCreateView.slider3.value)
+            faceCreateView.mouth.image = UIImage(named: "m\(mouthNumber)")
+            
+            print("slider3が動いた！")
+            
+        }else if _sender == faceCreateView.slider4{
+            
+            print("slider4が動いた！")
+        }
+        sliderMove()
+    }
+    
+    func sliderMove(){
+        
+        print("face4.sliderMove呼ばれた")
+        return self.delegate!.sliderMove(back: backNumber, front: frontNumber, outline: outlineNumber, eye:eyeNumber, eyebrows:eyebrowsNumber, mouth:mouthNumber, glasses: glassesNumber, hokuro: hokuroNumber, beard: beardNumber, haircolor: haircolorNumber, outlinecolor: outlinecolorNumber, glassescolor: glassescolorNumber, beardcolor: beardcolorNumber)
+       }
     
     //faceCreateViewの準備
     func setUpfaceCreateView(){
@@ -133,47 +175,23 @@ class FaceCreate2ViewController: UIViewController {
         faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
         faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
-        faceCreateView.expression.image = UIImage(named: "e\(expressionNumber)")
+        
+        //目、眉毛、口（表情）
+        faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")
+        faceCreateView.eyebrows.image = UIImage(named: "eb\(eyebrowsNumber)")
+        faceCreateView.mouth.image = UIImage(named: "m\(mouthNumber)")
         
         faceCreateView.glasses.image = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")
         faceCreateView.beard.image = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")
         faceCreateView.hokuro.image = UIImage(named: "h\(hokuroNumber)")
         
+        faceCreateView.icon1Image.image = UIImage(named: "icon4")
+        faceCreateView.icon2Image.image = UIImage(named: "icon5")
+        faceCreateView.icon3Image.image = UIImage(named: "icon6")
+        faceCreateView.icon4Image.isHidden = true
+        
         faceCreateView.saveButton.addTarget(self, action: #selector(SaveFace), for: UIControl.Event.touchUpInside)
         
-    }
-    
-    //スライダーの値を取れるようにする。
-    @objc func sliderValue(_sender: UISlider!){
-        
-        if _sender == faceCreateView.slider1{
-            //眉毛
-            //frontNumber = Int(faceCreateView.slider1.value)
-            //faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
-            
-            print("slider1が動いた！")
-            
-        }else if _sender == faceCreateView.slider2{
-            //目
-            //backNumber = Int(faceCreateView.slider2.value)
-            //faceCreateView.front.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
-            
-            print("slider2が動いた！")
-            
-        }else if _sender == faceCreateView.slider3{
-            //口
-            //outlineNumber = Int(faceCreateView.slider3.value)
-            faceCreateView.front.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
-            
-            print("slider3が動いた！")
-            
-        }else if _sender == faceCreateView.slider4{
-            
-            print("slider4が動いた！")
-            
-        }else{
-            print("どのsliderでもありません。")
-        }
     }
     
     //全体を保存
@@ -185,7 +203,9 @@ class FaceCreate2ViewController: UIViewController {
             self.person!.outlineNumber = outlineNumber
             self.person!.frontNumber = frontNumber
             
-            self.person!.exprassionNumber = expressionNumber
+            self.person!.eyeNumber = eyeNumber
+            self.person!.eyebrowsNumber = eyebrowsNumber
+            self.person!.mouthNumber = mouthNumber
             
             self.person!.beardNumber = beardNumber
             self.person!.glassesNumber = glassesNumber
@@ -201,18 +221,26 @@ class FaceCreate2ViewController: UIViewController {
         
         self.personCategory?.person = person
         
-        let memoVC = self.storyboard!.instantiateViewController(identifier: "memo") as! MemoCreateViewController
+        let tagTabBar = self.storyboard!.instantiateViewController(identifier: "tagTab") as! MemoTabBar
+        
+        let memoVC = tagTabBar.self.viewControllers![0] as! MemoCreateViewController
+        let tagVC = tagTabBar.self.viewControllers![1] as! TagCreateViewController
         
         memoVC.person = person
         memoVC.personCategory = personCategory
         memoVC.image = CompositeIgame()
         
+        tagVC.person = person
+        tagVC.personCategory = personCategory
+        tagVC.image = CompositeIgame()
+        
+    
         UIImage.ImagefileSave(person: person!, faceImage: memoVC.image)
         print("DEBUG_PRINT:テスト")
         
-        self.navigationController!.pushViewController(memoVC, animated: true)
+        self.navigationItem.hidesBackButton = true
+        self.navigationController!.pushViewController(tagTabBar, animated: true)
     }
-    
     
     //画像を合成する
     func CompositeIgame() -> UIImage {
@@ -226,7 +254,10 @@ class FaceCreate2ViewController: UIViewController {
         let backImage = UIImage(named: "b\(backNumber)\(haircolorNumber)")!
         let outlineImage = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")!
         let frontImage = UIImage(named: "f\(frontNumber)\(haircolorNumber)")!
-        let expressionImage = UIImage(named: "e\(expressionNumber)")!
+        
+        let eyeImage = UIImage(named: "eye\(eyeNumber)")!
+        let eyebrowsImage = UIImage(named: "eb\(eyebrowsNumber)")!
+        let mouthImage = UIImage(named: "m\(mouthNumber)")!
         
         let beardImage = UIImage(named: "be\(beardNumber)\(beardcolorNumber)")!
         let glassesImage = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")!
@@ -237,13 +268,16 @@ class FaceCreate2ViewController: UIViewController {
         let newoutlineImage = UIImage.ResizeÜIImage(image:outlineImage, width: 250, height: 300)
         
         let newfrontImage = UIImage.ResizeÜIImage(image:frontImage, width: 250, height: 300)
-        let newexpressionImage = UIImage.ResizeÜIImage(image:expressionImage, width: 250, height: 300)
+        
+        let neweyeImage = UIImage.ResizeÜIImage(image:eyeImage, width: 250, height: 300)
+        let neweyebrowsImage = UIImage.ResizeÜIImage(image:eyebrowsImage, width: 250, height: 300)
+        let newmouthImage = UIImage.ResizeÜIImage(image:mouthImage, width: 250, height: 300)
         
         let newbeardImage = UIImage.ResizeÜIImage(image:beardImage, width: 250, height: 300)
         let newglassesImage = UIImage.ResizeÜIImage(image:glassesImage, width: 250, height: 300)
         let newhokuroImage = UIImage.ResizeÜIImage(image:hokuroImage, width: 250, height: 300)
         
-        return [newbackImage!, newoutlineImage!, newfrontImage!, newexpressionImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
+        return [newbackImage!, newoutlineImage!, newfrontImage!, neweyeImage!, neweyebrowsImage!, newmouthImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
     }
 
     

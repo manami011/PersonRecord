@@ -7,6 +7,8 @@
 
 import UIKit
 import RealmSwift
+import MBProgressHUD
+import SVProgressHUD
 
 class TagDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -21,7 +23,7 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     var categorySearchResult : Results<Category>?
     var personSearchResult : Results<Person>?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,7 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
         categoryLabel.transform = CGAffineTransform(rotationAngle: -(.pi / 16))
         categoryName.transform = CGAffineTransform(rotationAngle: -(.pi / 16))
         
-        print("category!.categoryName:\(category!.categoryName)")
+        print("TagDetailViewController:category!.categoryName:\(category!.categoryName)")
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -53,41 +55,75 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     //セルのタップイベント
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("DEBUG_PRINT:セルに表示するpersonはこの人です！\(self.category?.personCategory[indexPath.row].person!.name)")
+      
+        if let person = self.category!.personCategory[indexPath.row].person{
+            
+            print("DEBUG_PRINT:personはこちら\(person)")
+            let detailVC = self.storyboard?.instantiateViewController(identifier: "detail") as! DetailViewController
+            detailVC.person = person
+            
+            self.navigationController?.pushViewController(detailVC, animated: true)
+            
+        }else{
+            return
+        }
         
-        let person = self.category?.personCategory[indexPath.row].person!
         
-        let detailVC = self.storyboard?.instantiateViewController(identifier: "detail") as! DetailViewController
-        detailVC.person = person
-        
-        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    
+    // 表示するセルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let count = category!.personCategory.count
+        var count = 0
+        
+        if category!.personCategory.count != 0{
+            
+            for i in 0...category!.personCategory.count-1{
+                
+                if category!.personCategory[i].person != nil {
+                    count += 1
+                }
+            }
+        }else{
+            //HUDでありません！
+            SVProgressHUD.showError(withStatus: "このタグに登録されている人はいません！")
+        }
+       
+        
+        //let count = category!.personCategory.count
         print("DEBUG_PRINT:Personcount\(count)")
-        return count // 表示するセルの数
+        return count
     }
     
+    //セルの内容
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
-        let person = self.category?.personCategory[indexPath.row].person!
         
-        //PersonImageのパス読み込み
-        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
-        //URL型にキャスト
-        let fileURL = URL(string: documentPath + "/" + person!.faceImageFilepath)
-        
-        let filePath = fileURL?.path
-        
-        let state = UIControl.State.normal
-        
-        cell.name.titleLabel?.numberOfLines = 0
-        cell.name.setTitle(person!.name, for: state)
-        cell.personImage.image = UIImage(contentsOfFile: filePath!)
-        
-        print("filePath:\(String(describing: filePath))")
+        if let person = self.category?.personCategory[indexPath.row].person{
+            
+            //PersonImageのパス読み込み
+            let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
+            //URL型にキャスト
+            let fileURL = URL(string: documentPath + "/" + person.faceImageFilepath)
+            
+            print("faceImageFilepath:\(person.faceImageFilepath)")
+            print("documentPath:\(documentPath)")
+            print("fileURL:\(String(describing: fileURL))")
+            
+            let filePath = fileURL?.path
+            
+            let state = UIControl.State.normal
+            
+            cell.name.titleLabel?.numberOfLines = 0
+            cell.name.setTitle(person.name, for: state)
+            
+            if let filePath = filePath{
+                cell.personImage.image = UIImage(contentsOfFile: filePath)
+            }
+            print("filePath:\(String(describing: filePath))")
+            
+        }
         
         return cell
     }
@@ -97,13 +133,13 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionViewLayout() -> UICollectionViewFlowLayout{
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 180, height: 250)
+        layout.itemSize = CGSize(width: 160, height: 220)
         
         return layout
     }
     
     
-
+    
     
     /*
      // MARK: - Navigation

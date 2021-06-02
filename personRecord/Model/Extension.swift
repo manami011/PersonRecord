@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import TagListView
 
+// MARK: - UIColor
 
 extension UIColor{
     struct MyTheme {
@@ -20,6 +21,8 @@ extension UIColor{
     }
 }
 
+// MARK: - ViewController
+
 extension ViewController: UITextViewDelegate{
     
     func textViewDidChange(_ textView: UITextView) {
@@ -29,6 +32,8 @@ extension ViewController: UITextViewDelegate{
     }
     
 }
+
+// MARK: - TagListView
 
 extension TagListView{
     
@@ -60,18 +65,45 @@ extension TagListView{
     
 }
 
+// MARK: - UILabel
+
 extension UILabel{
     
     class func CustomUILabel(label: UILabel){
         
         label.backgroundColor = UIColor.white
         label.layer.borderColor = UIColor.MyTheme.labelColor.cgColor
-        label.layer.borderWidth = 1.0
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10.0
+        //label.layer.borderWidth = 1.0
+        //label.layer.masksToBounds = true
+        //label.layer.cornerRadius = 10.0
     }
-    
 }
+
+class PaddingLabel: UILabel {
+
+    var padding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
+    override func drawText(in rect: CGRect) {
+        let newRect = rect.inset(by: padding)
+        super.drawText(in: newRect)
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var contentSize = super.intrinsicContentSize
+        contentSize.height += padding.top + padding.bottom
+        contentSize.width += padding.left + padding.right
+        return contentSize
+    }
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var contentSize = super.sizeThatFits(size)
+        contentSize.width += padding.left + padding.right
+        contentSize.height += padding.top + padding.bottom
+        return contentSize
+    }
+}
+
+// MARK: - UITextView
 
 extension UITextView{
     
@@ -87,6 +119,9 @@ extension UITextView{
     
 }
 
+
+// MARK: - UITextField
+
 extension UITextField{
     
     //textFieldの見た目をカスタマイズ
@@ -101,6 +136,7 @@ extension UITextField{
     }
 }
 
+// MARK: - UIImage
 
 extension UIImage{
     
@@ -155,7 +191,7 @@ extension UIImage{
 
     let realm = try! Realm()
     
-    let filename = person.name + String(person.id)
+    let filename = String(person.id)
         
          // DocumentディレクトリのfileURLを取得
          if documentDirectoryFileURL != nil {
@@ -172,7 +208,6 @@ extension UIImage{
             }catch {
                 //エラー処理
                 print("エラー")
-            
             }
         //②「Documents下のパス情報をRealmに保存する」
         try! realm.write(){
@@ -180,10 +215,5 @@ extension UIImage{
             person.faceImageFilepath = "\(filename)"
             realm.add(person)
         }
-            
-        
-    
     }
-    
-    
 }
