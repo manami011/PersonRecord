@@ -9,7 +9,8 @@ import UIKit
 
 class TagTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelButton: UIButton!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,11 +23,6 @@ class TagTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCategoryname(_ category: Category){
-        
-        let state = UIControl.State.normal
-        labelButton.setTitle(category.categoryName, for: state)
-        
-    }
+
     
 }

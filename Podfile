@@ -11,5 +11,7 @@ target 'personRecord' do
   pod 'SVProgressHUD','2.2.5'
   pod 'MBProgressHUD', '~> 1.2.0'
   pod 'TagListView', '~> 1.0'
+  pod 'Onboard'
+  pod 'EAIntroView' 
 
 end

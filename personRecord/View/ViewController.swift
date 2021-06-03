@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-   
+    
     let realm = try! Realm()
     var searchResult : Results<Person>?
     
@@ -80,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         otherResult = realm.objects(Person.self).filter(
             "(NOT furigana BEGINSWITH 'あ') AND (NOT furigana BEGINSWITH 'い') AND (NOT furigana BEGINSWITH 'う') AND (NOT furigana BEGINSWITH 'え') AND (NOT furigana BEGINSWITH 'お') AND (NOT furigana BEGINSWITH 'か') AND (NOT furigana BEGINSWITH 'き') AND (NOT furigana BEGINSWITH 'く') AND (NOT furigana BEGINSWITH 'け') AND (NOT furigana BEGINSWITH 'こ') AND (NOT furigana BEGINSWITH 'さ') AND (NOT furigana BEGINSWITH 'し') AND (NOT furigana BEGINSWITH 'す') AND (NOT furigana BEGINSWITH 'せ') AND (NOT furigana BEGINSWITH 'そ') AND (NOT furigana BEGINSWITH 'た') AND (NOT furigana BEGINSWITH 'ち') AND (NOT furigana BEGINSWITH 'つ') AND (NOT furigana BEGINSWITH 'て') AND (NOT furigana BEGINSWITH 'と') AND (NOT furigana BEGINSWITH 'な') AND (NOT furigana BEGINSWITH 'に') AND (NOT furigana BEGINSWITH 'ぬ') AND (NOT furigana BEGINSWITH 'ね') AND (NOT furigana BEGINSWITH 'の') AND (NOT furigana BEGINSWITH 'は') AND (NOT furigana BEGINSWITH 'ひ') AND (NOT furigana BEGINSWITH 'ふ') AND (NOT furigana BEGINSWITH 'へ') AND (NOT furigana BEGINSWITH 'ほ') AND (NOT furigana BEGINSWITH 'ま') AND (NOT furigana BEGINSWITH 'み') AND (NOT furigana BEGINSWITH 'む') AND (NOT furigana BEGINSWITH 'め') AND (NOT furigana BEGINSWITH 'も') AND (NOT furigana BEGINSWITH 'や') AND (NOT furigana BEGINSWITH 'ゆ') AND (NOT furigana BEGINSWITH 'よ') AND (NOT furigana BEGINSWITH 'ら') AND (NOT furigana BEGINSWITH 'り') AND (NOT furigana BEGINSWITH 'る') AND (NOT furigana BEGINSWITH 'れ') AND (NOT furigana BEGINSWITH 'ろ') AND (NOT furigana BEGINSWITH 'わ') AND (NOT furigana BEGINSWITH 'を') AND (NOT furigana BEGINSWITH 'ん')"
         ).sorted(byKeyPath: "furigana", ascending: true)
- 
+        
     }
     
     //入力画面から戻ってきたときにTableViewを更新する
@@ -104,13 +104,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // テキストフィールド入力開始前に呼ばれる
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-     print("searchBarShouldBeginEditing")
+        print("searchBarShouldBeginEditing")
         
         let searchVC = self.storyboard!.instantiateViewController(identifier: "search") as! SearchTableViewController
         searchVC.searchResult = self.searchResult
         self.navigationController?.pushViewController(searchVC, animated: true)
         
-     return false
+        return false
     }
     
     
@@ -152,7 +152,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return otherResult!.count
         }
     }
-        
+    
     
     
     //各セルの内容を返すメソッド
@@ -261,7 +261,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Deleteボタンが押された時に呼ばれる
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    
+        
         if editingStyle == .delete{
             print("[indexPath.row]: \(indexPath.row)")
             
@@ -271,33 +271,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [String(person.id)])
             
-           
-            //データベースから削除する
-            try! realm.write{
-                
-                //人物を削除したら、紐づくpersonCategoryも削除する
-                //let personCategory = realm.objects(PersonCategory.self)
-                for i in 0...person.personCategory.count-1{
-
-                    self.realm.delete(person.personCategory[i])
-
+            if person.personCategory.count != 0{
+                //データベースから削除する
+                try! realm.write{
+                    //人物を削除したら、紐づくpersonCategoryも削除する
+                    for personCategory in person.personCategory{
+                        self.realm.delete(personCategory)
+                    }
                 }
-                
-                self.realm.delete(person)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                
+            }
+            try! realm.write{
+            self.realm.delete(person)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
     }
     
     //セクション
     func numberOfSections(in tableView: UITableView) -> Int {
-           //セクションの数
-           return 11
-       }
-       
-       func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-           
+        //セクションの数
+        return 11
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let label = UILabel()
         label.backgroundColor = UIColor.MyTheme.labelColor
         label.textColor = UIColor.MyTheme.iconColor
@@ -305,8 +302,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //セクションのタイトルを設定する。
         return label
-       }
-
-
+    }
+    
+    
 }
 

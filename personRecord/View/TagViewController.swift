@@ -29,6 +29,10 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         categorySearchResult = realm.objects(Category.self)
         
+        // カスタムセルを登録する
+        let nib = UINib(nibName: "TagTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "Cell")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +50,11 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TagTableViewCell
         cell.contentView.backgroundColor = UIColor.MyTheme.backgroundColor
         
         let category = categorySearchResult![indexPath.row]
-        cell.textLabel?.text = category.categoryName
+        cell.categoryLabel.text = category.categoryName
         
         return cell
     }

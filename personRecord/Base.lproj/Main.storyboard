@@ -203,13 +203,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="誰を作成しますか？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7C-QM-LF6">
-                                <rect key="frame" x="129" y="119" width="156" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="124.33333333333333" y="119.00000000000001" width="165.33333333333337" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBN-Uu-hG9">
-                                <rect key="frame" x="132" y="323" width="150" height="50"/>
+                                <rect key="frame" x="132" y="323.66666666666669" width="150" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="79f-I5-gpf"/>
                                     <constraint firstAttribute="height" constant="50" id="nk6-53-LTS"/>
@@ -223,7 +223,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrg-Xh-m7w">
-                                <rect key="frame" x="132" y="393" width="150" height="50"/>
+                                <rect key="frame" x="132" y="393.66666666666669" width="150" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="U48-qP-85x"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="z7H-g2-3IM"/>
@@ -236,14 +236,14 @@
                                     <action selector="Cancel:" destination="ycb-qp-27C" eventType="touchUpInside" id="sKW-lc-S2f"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="なまえ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ri5-Zm-4nb">
-                                <rect key="frame" x="40" y="180" width="334" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名前" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ri5-Zm-4nb">
+                                <rect key="frame" x="40" y="180.66666666666666" width="334" height="34"/>
                                 <color key="backgroundColor" white="1" alpha="0.80230920493197277" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ふりがな" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mrp-3L-Ub8">
-                                <rect key="frame" x="40" y="234" width="334" height="34"/>
+                                <rect key="frame" x="40" y="234.66666666666666" width="334" height="33.999999999999972"/>
                                 <color key="backgroundColor" white="1" alpha="0.80230920490000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
