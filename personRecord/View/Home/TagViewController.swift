@@ -11,21 +11,25 @@ import MBProgressHUD
 import SVProgressHUD
 
 class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
- 
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     let realm = try! Realm()
     var categorySearchResult : Results<Category>?
+    var searchResult : Results<Person>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.MyTheme.backgroundColor
         tableView.backgroundColor = UIColor.MyTheme.backgroundColor
         
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         
         categorySearchResult = realm.objects(Category.self)
         
@@ -33,14 +37,26 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let nib = UINib(nibName: "TagTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
         
+        
+        
+        //サーチバー
+        searchBar.backgroundImage = UIImage()
+        searchBar.placeholder = "ふりがなで検索"
+        searchBar.searchTextField.backgroundColor = UIColor.white
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.isHidden = false
+        
         super.viewWillAppear(animated)
         self.navigationItem.hidesBackButton = true
         hidesBottomBarWhenPushed = false
         tableView.reloadData()
         print("TableView更新")
+        
+        searchResult = realm.objects(Person.self).sorted(byKeyPath: "furigana")
     }
     
     
@@ -70,18 +86,38 @@ class TagViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         tagVC.category = categorySearchResult![indexPath!.row]
         
-      self.navigationController!.pushViewController(tagVC, animated: true)
+        self.navigationController!.pushViewController(tagVC, animated: true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //追加ボタン
+    @IBAction func CreatePerson(_ sender: Any) {
+        
+        let nameCreateVC = self.storyboard!.instantiateViewController(identifier: "name") as! NameCreateViewController
+        nameCreateVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(nameCreateVC, animated: true)
+        self.navigationItem.hidesBackButton = false
     }
-    */
-
+    
+    // テキストフィールド入力開始前に呼ばれる
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        print("searchBarShouldBeginEditing")
+        
+        let searchVC = self.storyboard!.instantiateViewController(identifier: "searchFilter") as! FilterSearchViewController
+        searchVC.searchResult = self.searchResult
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        
+        return false
+    }
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -35,7 +35,7 @@ class Person: Object{
     
     
     
-    //カラー番号-------------------
+    //Color-------------------
     
     //髪の毛、肌
     @objc dynamic var haircolorNumber = 0
@@ -49,18 +49,26 @@ class Person: Object{
     @objc dynamic    var beardcolorNumber = 0
     @objc dynamic    var glassescolorNumber = 0
     
-    //------------------------------------
     
-    //名前
+    //name-------------------
     @objc dynamic var name = ""
     @objc dynamic var furigana = ""
     
-    //メモ内容(複数)
-    @objc dynamic var memo1 = ""
-    @objc dynamic var memo2 = ""
-    @objc dynamic var memo3 = ""
+    //memo-------------------
+    @objc dynamic var memo = ""
     
-    //TODO:カテゴリーを持たせる
+    
+    //filters-------------------
+    @objc dynamic var gender = ""
+    @objc dynamic var height = ""
+    @objc dynamic var hairLength = ""
+    
+    @objc dynamic var glasses = false
+    @objc dynamic var hokuro = false
+    @objc dynamic var beard = false
+    
+    //---------------------------
+    
     var personCategory = List<PersonCategory>()
     
     //idをプライマリーキーとして設定

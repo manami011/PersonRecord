@@ -258,7 +258,7 @@ class FaceCreate3ViewController: UIViewController {
     //画像を合成する
     func CompositeIgame() -> UIImage {
       
-        let composedImage = UIImage.ComposeUIImage(UIImageArray: ResizeÜIImage(), width: 250, height: 300)
+        let composedImage = UIImage.ComposeUIImage(UIImageArray: ResizeÜIImage(), width: 215, height: 247)
         return composedImage!
     }
     

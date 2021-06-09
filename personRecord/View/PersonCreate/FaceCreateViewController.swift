@@ -149,7 +149,7 @@ class FaceCreateViewController: UIViewController {
         faceCreateView.slider1.maximumValue = 4
         faceCreateView.slider1.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //後ろ髪
-        faceCreateView.slider2.maximumValue = 5
+        faceCreateView.slider2.maximumValue = 4
         faceCreateView.slider2.addTarget(self, action: #selector(sliderValue(_sender:)), for: .valueChanged)
         //輪郭
         faceCreateView.slider3.maximumValue = 5
@@ -251,7 +251,7 @@ class FaceCreateViewController: UIViewController {
     //画像を合成する
     func CompositeIgame() -> UIImage {
       
-        let composedImage = UIImage.ComposeUIImage(UIImageArray: ResizeÜIImage(), width: 280, height: 330)
+        let composedImage = UIImage.ComposeUIImage(UIImageArray: ResizeÜIImage(), width: 215, height: 247)
         return composedImage!
     }
     
@@ -269,20 +269,23 @@ class FaceCreateViewController: UIViewController {
         let glassesImage = UIImage(named: "g\(glassesNumber)\(glassescolorNumber)")!
         let hokuroImage = UIImage(named: "h\(hokuroNumber)")!
         
-        
-        let newbackImage = UIImage.ResizeÜIImage(image:backImage, width: 250, height: 300)
-        let newoutlineImage = UIImage.ResizeÜIImage(image:outlineImage, width: 250, height: 300)
-        
-        let newfrontImage = UIImage.ResizeÜIImage(image:frontImage, width: 250, height: 300)
-        
-        let neweyeImage = UIImage.ResizeÜIImage(image:eyeImage, width: 250, height: 300)
-        let neweyebrowsImage = UIImage.ResizeÜIImage(image:eyebrowsImage, width: 250, height: 300)
-        let newmouthImage = UIImage.ResizeÜIImage(image:mouthImage, width: 250, height: 300)
+        let width = 215
+        let height = 247
         
         
-        let newbeardImage = UIImage.ResizeÜIImage(image:beardImage, width: 250, height: 300)
-        let newglassesImage = UIImage.ResizeÜIImage(image:glassesImage, width: 250, height: 300)
-        let newhokuroImage = UIImage.ResizeÜIImage(image:hokuroImage, width: 250, height: 300)
+        let newbackImage = UIImage.ResizeÜIImage(image:backImage, width: CGFloat(width), height: CGFloat(height))
+        let newoutlineImage = UIImage.ResizeÜIImage(image:outlineImage, width: CGFloat(width), height: CGFloat(height))
+        
+        let newfrontImage = UIImage.ResizeÜIImage(image:frontImage, width: CGFloat(width), height: CGFloat(height))
+        
+        let neweyeImage = UIImage.ResizeÜIImage(image:eyeImage, width: CGFloat(width), height: CGFloat(height))
+        let neweyebrowsImage = UIImage.ResizeÜIImage(image:eyebrowsImage, width: CGFloat(width), height: CGFloat(height))
+        let newmouthImage = UIImage.ResizeÜIImage(image:mouthImage, width: CGFloat(width), height: CGFloat(height))
+        
+        
+        let newbeardImage = UIImage.ResizeÜIImage(image:beardImage, width: CGFloat(width), height: CGFloat(height))
+        let newglassesImage = UIImage.ResizeÜIImage(image:glassesImage, width: CGFloat(width), height: CGFloat(height))
+        let newhokuroImage = UIImage.ResizeÜIImage(image:hokuroImage, width: CGFloat(width), height: CGFloat(height))
         
         return [newbackImage!, newoutlineImage!, newfrontImage!, neweyeImage!, neweyebrowsImage!, newmouthImage!, newbeardImage!, newglassesImage!, newhokuroImage!]
     }

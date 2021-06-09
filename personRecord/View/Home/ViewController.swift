@@ -85,6 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //入力画面から戻ってきたときにTableViewを更新する
     override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.isHidden = false
+        
         super.viewWillAppear(animated)
         self.navigationItem.hidesBackButton = true
         hidesBottomBarWhenPushed = false
@@ -106,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         print("searchBarShouldBeginEditing")
         
-        let searchVC = self.storyboard!.instantiateViewController(identifier: "search") as! SearchTableViewController
+        let searchVC = self.storyboard!.instantiateViewController(identifier: "searchFilter") as! FilterSearchViewController
         searchVC.searchResult = self.searchResult
         self.navigationController?.pushViewController(searchVC, animated: true)
         

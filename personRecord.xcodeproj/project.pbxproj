@@ -16,6 +16,8 @@
 		C81E8C68265E0D1700A3F010 /* FaceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E8C67265E0D1700A3F010 /* FaceCreateView.swift */; };
 		C81E8C6C265E0D2600A3F010 /* FaceCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C81E8C6B265E0D2600A3F010 /* FaceCreateView.xib */; };
 		C8495DB3265DE7D8008FE4BC /* Test2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8495DB2265DE7D8008FE4BC /* Test2ViewController.swift */; };
+		C84C4DB5266DD5D1009B1D84 /* FaceCreateViewiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C4DB4266DD5D1009B1D84 /* FaceCreateViewiPad.swift */; };
+		C84C4DB9266DD608009B1D84 /* FaceCreateViewiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C84C4DB8266DD608009B1D84 /* FaceCreateViewiPad.xib */; };
 		C8594B2D2660932D006A5719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C85A2654264A4CB6007B3FF0 /* Assets.xcassets */; };
 		C8594B302660938D006A5719 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8594B2F2660938D006A5719 /* Images.xcassets */; };
 		C85A264C264A4CB5007B3FF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */; };
@@ -39,7 +41,10 @@
 		C881B7AF265CE08300709097 /* PersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C881B7AE265CE08300709097 /* PersonView.xib */; };
 		C881B7B2265CE09000709097 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C881B7B1265CE09000709097 /* PersonView.swift */; };
 		C88B6361265E9CF20029BB00 /* TagCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88B6360265E9CF20029BB00 /* TagCreateViewController.swift */; };
+		C89C183C266F2FA7003937ED /* FilterSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89C183B266F2FA7003937ED /* FilterSearchViewController.swift */; };
 		C8ABC07926561F510000DDEC /* MemoTabBar.swift in Resources */ = {isa = PBXBuildFile; fileRef = C8DFF48C2655F393004BCD95 /* MemoTabBar.swift */; };
+		C8B05DE3266F08BC00E9B059 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B05DE2266F08BC00E9B059 /* FilterView.swift */; };
+		C8B05DE7266F08C700E9B059 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8B05DE6266F08C700E9B059 /* FilterView.xib */; };
 		C8B404AF265BD26E00385343 /* NameLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8B404AE265BD26E00385343 /* NameLabelView.xib */; };
 		C8B404B2265BD28400385343 /* NameLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B404B1265BD28400385343 /* NameLabelView.swift */; };
 		C8B404B6265BEE9100385343 /* FaceCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B404B5265BEE9100385343 /* FaceCreateViewController.swift */; };
@@ -71,6 +76,8 @@
 		C81E8C67265E0D1700A3F010 /* FaceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCreateView.swift; sourceTree = "<group>"; };
 		C81E8C6B265E0D2600A3F010 /* FaceCreateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceCreateView.xib; sourceTree = "<group>"; };
 		C8495DB2265DE7D8008FE4BC /* Test2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2ViewController.swift; sourceTree = "<group>"; };
+		C84C4DB4266DD5D1009B1D84 /* FaceCreateViewiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCreateViewiPad.swift; sourceTree = "<group>"; };
+		C84C4DB8266DD608009B1D84 /* FaceCreateViewiPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceCreateViewiPad.xib; sourceTree = "<group>"; };
 		C8594B2F2660938D006A5719 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C85A2648264A4CB5007B3FF0 /* personRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = personRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +103,9 @@
 		C881B7AE265CE08300709097 /* PersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonView.xib; sourceTree = "<group>"; };
 		C881B7B1265CE09000709097 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		C88B6360265E9CF20029BB00 /* TagCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCreateViewController.swift; sourceTree = "<group>"; };
+		C89C183B266F2FA7003937ED /* FilterSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSearchViewController.swift; sourceTree = "<group>"; };
+		C8B05DE2266F08BC00E9B059 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		C8B05DE6266F08C700E9B059 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		C8B404AE265BD26E00385343 /* NameLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameLabelView.xib; sourceTree = "<group>"; };
 		C8B404B1265BD28400385343 /* NameLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLabelView.swift; sourceTree = "<group>"; };
 		C8B404B5265BEE9100385343 /* FaceCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceCreateViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +163,8 @@
 				C8E76A69265763D700993BFC /* FaceView.xib */,
 				C81E8C67265E0D1700A3F010 /* FaceCreateView.swift */,
 				C81E8C6B265E0D2600A3F010 /* FaceCreateView.xib */,
+				C84C4DB4266DD5D1009B1D84 /* FaceCreateViewiPad.swift */,
+				C84C4DB8266DD608009B1D84 /* FaceCreateViewiPad.xib */,
 			);
 			path = Face;
 			sourceTree = "<group>";
@@ -236,11 +248,7 @@
 				C8ABC080265627FB0000DDEC /* MemoCreate */,
 				C8D54C1E2654C2FE00775AE2 /* PersonCreate */,
 				C8D54C192654AA2D00775AE2 /* TabBar */,
-				C85A264F264A4CB5007B3FF0 /* ViewController.swift */,
-				C862CACF2651F7320064880B /* DetailViewController.swift */,
-				C8E76A5B2657526800993BFC /* TagViewController.swift */,
-				C8E76A6126575A6A00993BFC /* TagDetailViewController.swift */,
-				C8BA887B2657F03C00E29A60 /* SearchTableViewController.swift */,
+				C8A60AFF2668C07C00CF1F93 /* Home */,
 				C80EA52B265DDA5C00806FF6 /* Test */,
 			);
 			path = View;
@@ -255,6 +263,19 @@
 			path = MemoView;
 			sourceTree = "<group>";
 		};
+		C8A60AFF2668C07C00CF1F93 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C85A264F264A4CB5007B3FF0 /* ViewController.swift */,
+				C862CACF2651F7320064880B /* DetailViewController.swift */,
+				C8E76A5B2657526800993BFC /* TagViewController.swift */,
+				C8E76A6126575A6A00993BFC /* TagDetailViewController.swift */,
+				C8BA887B2657F03C00E29A60 /* SearchTableViewController.swift */,
+				C89C183B266F2FA7003937ED /* FilterSearchViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		C8ABC080265627FB0000DDEC /* MemoCreate */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +283,15 @@
 				C88B6360265E9CF20029BB00 /* TagCreateViewController.swift */,
 			);
 			path = MemoCreate;
+			sourceTree = "<group>";
+		};
+		C8B05DE1266F08A500E9B059 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C8B05DE2266F08BC00E9B059 /* FilterView.swift */,
+				C8B05DE6266F08C700E9B059 /* FilterView.xib */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		C8D54C192654AA2D00775AE2 /* TabBar */ = {
@@ -289,6 +319,7 @@
 		C8E76A64265762F900993BFC /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				C8B05DE1266F08A500E9B059 /* Search */,
 				C87E20C8265F21C20023BDE3 /* MemoView */,
 				C8495DAF265DE2AC008FE4BC /* TableCell */,
 				C8495DAE265DE282008FE4BC /* Label */,
@@ -368,6 +399,7 @@
 				C81E8C65265E071F00A3F010 /* TagTableViewCell.xib in Resources */,
 				C8B404BB265C8E2000385343 /* CollectionViewCell.xib in Resources */,
 				C80EA529265DCA9F00806FF6 /* costomTableViewCell.xib in Resources */,
+				C84C4DB9266DD608009B1D84 /* FaceCreateViewiPad.xib in Resources */,
 				C8ABC07926561F510000DDEC /* MemoTabBar.swift in Resources */,
 				C8594B2D2660932D006A5719 /* Assets.xcassets in Resources */,
 				C85A2658264A4CB6007B3FF0 /* LaunchScreen.storyboard in Resources */,
@@ -379,6 +411,7 @@
 				C8DFA637265A16A900FFDC10 /* LabelView.xib in Resources */,
 				C8B404AF265BD26E00385343 /* NameLabelView.xib in Resources */,
 				C87E20D3265F220C0023BDE3 /* MemoView.xib in Resources */,
+				C8B05DE7266F08C700E9B059 /* FilterView.xib in Resources */,
 				C881B7AF265CE08300709097 /* PersonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,11 +469,13 @@
 				C881B7A9265CDE9600709097 /* CategoryLabel.swift in Sources */,
 				C8761A3B2665DC8B00030024 /* KeyBoard.swift in Sources */,
 				C85A2669264CF37F007B3FF0 /* Person.swift in Sources */,
+				C8B05DE3266F08BC00E9B059 /* FilterView.swift in Sources */,
 				C85A2650264A4CB5007B3FF0 /* ViewController.swift in Sources */,
 				C81E8C68265E0D1700A3F010 /* FaceCreateView.swift in Sources */,
 				C8B404B2265BD28400385343 /* NameLabelView.swift in Sources */,
 				C85A264C264A4CB5007B3FF0 /* AppDelegate.swift in Sources */,
 				C88B6361265E9CF20029BB00 /* TagCreateViewController.swift in Sources */,
+				C89C183C266F2FA7003937ED /* FilterSearchViewController.swift in Sources */,
 				C8B404BA265C8E2000385343 /* CollectionViewCell.swift in Sources */,
 				C8E76A5C2657526800993BFC /* TagViewController.swift in Sources */,
 				C87E20CA265F21DF0023BDE3 /* MemoView.swift in Sources */,
@@ -461,6 +496,7 @@
 				C8101104265D2C09005F6723 /* testViewController.swift in Sources */,
 				C8DFF48A2655E5A3004BCD95 /* FaceCreate4ViewController.swift in Sources */,
 				C8495DB3265DE7D8008FE4BC /* Test2ViewController.swift in Sources */,
+				C84C4DB5266DD5D1009B1D84 /* FaceCreateViewiPad.swift in Sources */,
 				C862CACD264E56AA0064880B /* NameCreateViewController.swift in Sources */,
 				C81E8C64265E071F00A3F010 /* TagTableViewCell.swift in Sources */,
 				C8D54C202654C33300775AE2 /* FaceCreate2ViewController.swift in Sources */,
@@ -620,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ip.techacademy.manami.takeuchi2.personRecord2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -641,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ip.techacademy.manami.takeuchi2.personRecord2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

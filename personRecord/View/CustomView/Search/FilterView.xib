@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FilterView" customModule="personRecord" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="130"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="esj-6l-CMA">
+                    <rect key="frame" x="5" y="10" width="300" height="108"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="hPb-yJ-kiy" userLabel="TitleStack View">
+                            <rect key="frame" x="0.0" y="4" width="40" height="100"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性別" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb1-L0-OSP">
+                                    <rect key="frame" x="4.5" y="0.0" width="31" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身長" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5p-S8-XNS">
+                                    <rect key="frame" x="4.5" y="42" width="31" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="その他" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJX-9s-yz5">
+                                    <rect key="frame" x="0.0" y="84" width="40" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="TD3-oB-YyJ"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="D7R-2q-X4h" userLabel="contentStack View">
+                            <rect key="frame" x="66" y="0.0" width="234" height="108"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kJs-SF-nCV" userLabel="1Stack View">
+                                    <rect key="frame" x="0.0" y="0.0" width="234" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBg-di-BP5">
+                                            <rect key="frame" x="0.0" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="vpq-PG-aHA"/>
+                                                <constraint firstAttribute="height" constant="25" id="wN2-4j-g0i"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="男性" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPs-UK-AGG">
+                                            <rect key="frame" x="72" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="21D-ll-t7w"/>
+                                                <constraint firstAttribute="height" constant="25" id="aPH-LS-TVB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="女性" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53s-qm-7O7">
+                                            <rect key="frame" x="144" y="2.5" width="90" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="8j5-ER-aIy"/>
+                                                <constraint firstAttribute="width" constant="90" id="kJI-Lx-JUn"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <state key="normal" title="どちらでもない" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="C0p-Ov-Ufg"/>
+                                    </constraints>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fub-3b-Cc0" userLabel="2Stack View">
+                                    <rect key="frame" x="0.0" y="39" width="230" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bek-X5-QLm">
+                                            <rect key="frame" x="0.0" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="Hto-9W-9pj"/>
+                                                <constraint firstAttribute="width" constant="70" id="cTH-rV-AlT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="高い" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sd8-DP-tGV">
+                                            <rect key="frame" x="80" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="WUc-ZG-ItZ"/>
+                                                <constraint firstAttribute="width" constant="70" id="jrQ-Y6-x85"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="普通" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbq-Mu-luP">
+                                            <rect key="frame" x="160" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="NzL-6c-Af3"/>
+                                                <constraint firstAttribute="height" constant="25" id="ZvW-Ns-hVb"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="低い" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="6M4-CP-531"/>
+                                    </constraints>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xWI-VZ-4YF" userLabel="3Stack View">
+                                    <rect key="frame" x="0.0" y="78" width="230" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afA-SC-xTY">
+                                            <rect key="frame" x="0.0" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="Qve-I8-C79"/>
+                                                <constraint firstAttribute="height" constant="25" id="hgQ-4Z-jlG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="メガネ" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEm-6i-sce">
+                                            <rect key="frame" x="80" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="9r9-5n-Vya"/>
+                                                <constraint firstAttribute="width" constant="70" id="aa8-dU-cDN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="ほくろ" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt4-av-tdL">
+                                            <rect key="frame" x="160" y="2.5" width="70" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="aIU-1C-FG7"/>
+                                                <constraint firstAttribute="width" constant="70" id="iRA-lR-L2K"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <state key="normal" title="ひげ" backgroundImage="filter1">
+                                                <color key="titleColor" systemColor="labelColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="mIQ-Md-R2B"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="esj-6l-CMA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="C00-or-alW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="esj-6l-CMA" secondAttribute="trailing" constant="5" id="bbL-Rt-LoE"/>
+                <constraint firstItem="esj-6l-CMA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="mBy-Py-mMj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="beardButton" destination="gt4-av-tdL" id="jzJ-qt-Cco"/>
+                <outlet property="femaleButton" destination="DPs-UK-AGG" id="aPo-Jw-gJo"/>
+                <outlet property="glassesButton" destination="afA-SC-xTY" id="57T-13-V4R"/>
+                <outlet property="hokuroButton" destination="CEm-6i-sce" id="9fq-2l-Y0i"/>
+                <outlet property="longButton" destination="bek-X5-QLm" id="MDO-Qn-Tk0"/>
+                <outlet property="maleButton" destination="uBg-di-BP5" id="0tQ-VY-AlH"/>
+                <outlet property="middleButon" destination="Sd8-DP-tGV" id="Zs7-8l-wuT"/>
+                <outlet property="noGenderButton" destination="53s-qm-7O7" id="hdk-dH-X76"/>
+                <outlet property="shortButton" destination="Fbq-Mu-luP" id="D88-HX-3Cc"/>
+            </connections>
+            <point key="canvasLocation" x="100.72463768115942" y="-130.91517857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="filter1" width="187.5" height="58.5"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -16,13 +16,18 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     
     //項目名ラベル
     @IBOutlet weak var nameButton: UIButton!
-    @IBOutlet weak var title1Label: UILabel!
+    
     @IBOutlet weak var title2Label: UILabel!
     
-    //メモ内容
-    @IBOutlet weak var memo1Label: PaddingLabel!
-    @IBOutlet weak var memo2Label: PaddingLabel!
+    //フィルター表示
+    @IBOutlet weak var genderLabel: UIButton!
+    @IBOutlet weak var heightLabel: UIButton!
+    @IBOutlet weak var glassesLabel: UIButton!
     
+    @IBOutlet weak var threestackView: UIStackView!
+    
+    //メモ内容
+    @IBOutlet weak var memoLabel: PaddingLabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -34,6 +39,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     let realm = try! Realm()
     var person: Person?
     var searchResult : Results<Person>?
+    
     
     let MARGIN: CGFloat = 10
     
@@ -48,6 +54,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
         setUpView()
     }
     
@@ -72,25 +79,59 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         
         view.backgroundColor = UIColor.MyTheme.backgroundColor
         
-        //title1Label.backgroundColor = UIColor.MyTheme.labelColor
         FaceImageLoad()
-        memo1Label.text = person!.memo1
-        memo2Label.text = person!.memo2
+        memoLabel.text = person!.memo
         
         
         let state = UIControl.State.normal
         nameButton.setTitle(person!.name, for: state)
-        PaddingLabel.CustomUILabel(label: memo1Label)
-        PaddingLabel.CustomUILabel(label: memo2Label)
+        PaddingLabel.CustomUILabel(label: memoLabel)
         
         PreCreateTagLabel()
         TagListView.CustomTagListView(tagListView: tagListView)
         // タグの削除ボタンを有効に
         tagListView.enableRemoveButton = false
         tagListView.tagBackgroundColor = UIColor.MyTheme.tabBarColor
+        
+        CreateFilterLabel()
     }
     
-    
+    func CreateFilterLabel(){
+        
+        
+        genderLabel.setTitle(person?.gender, for: UIControl.State.normal)
+        heightLabel.setTitle(person?.height, for: UIControl.State.normal)
+        
+        let personfilters = [
+             "メガネ" : person?.glasses,
+             "ほくろ" : person?.hokuro,
+             "ひげ" : person?.beard
+        ]
+        
+        var xposition = 0
+        for filter in personfilters{
+            
+            
+            if filter.value == true{
+                print("キー\(filter.key),value:\(filter.value)")
+                let btn = UIButton()
+                let image = UIImage(named: "filter1")
+                btn.setBackgroundImage(image, for: UIControl.State.normal)
+                btn.setTitle("\(filter.key)", for: UIControl.State.normal)
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                
+                xposition += 80
+                print("xposition:\(xposition)")
+                btn.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                btn.frame = CGRect(x: xposition, y: 0, width: 80, height: 30)
+                threestackView.addSubview(btn)
+                self.view.bringSubviewToFront(threestackView)
+            }
+            
+        }
+        
+        
+    }
     
     func FaceImageLoad(){
         //PersonImageのパス読み込み
@@ -108,6 +149,9 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     
     //登録してあるCategoryタグを作る
     func PreCreateTagLabel(){
+        
+        //タグを全て消去
+        tagListView.removeAllTags()
         
         if self.person!.personCategory.count == 0{
             print("Categoryは０件です")

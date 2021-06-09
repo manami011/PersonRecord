@@ -20,8 +20,22 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
     @IBOutlet weak var nameButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     
-    @IBOutlet weak var memo1TextField: UITextField!
-    @IBOutlet weak var memo2TextView: UITextView!
+    @IBOutlet weak var memoTextView: UITextView!
+    
+    //Filters
+    @IBOutlet weak var filterStackView: UIStackView!
+   @IBOutlet weak var filterView: FilterView!
+    var maleButton: UIButton!
+    var femaleButton: UIButton!
+    var noGenderButton: UIButton!
+    var longButton: UIButton!
+    var middleButton: UIButton!
+    var shortButton: UIButton!
+    var glassesButton: UIButton!
+    var hokuroButton: UIButton!
+    var beardButton: UIButton!
+    
+    var btnArray: [UIButton] = []
     
     @IBOutlet weak var memo2TextViewHeight: NSLayoutConstraint!
     
@@ -47,15 +61,36 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
         setUpfaceCreateView()
         
         //TextViewカスタマイズ
-        UITextField.CustomTextField(textField: memo1TextField)
-        UITextView.CustomTextView(textView: memo2TextView)
+        UITextView.CustomTextView(textView: memoTextView)
         
         categorySearchResult = realm.objects(Category.self)
         setTextField()
         
-        memo1TextField.delegate = self
-        memo2TextView.delegate = self
+        memoTextView.delegate = self
         CreateToolBar()
+        
+        let nib = UINib(nibName: "FilterView", bundle: nil)
+        filterView = nib.instantiate(withOwner: self, options: nil).first as? FilterView
+        
+        filterStackView.addSubview(filterView)
+        
+        maleButton = filterView.maleButton
+        femaleButton = filterView.femaleButton
+        noGenderButton = filterView.noGenderButton
+        longButton = filterView.longButton
+        middleButton = filterView.middleButon
+        shortButton = filterView.shortButton
+        glassesButton = filterView.glassesButton
+        hokuroButton = filterView.hokuroButton
+        beardButton = filterView.beardButton
+      
+        
+        btnArray = [maleButton, femaleButton, noGenderButton, longButton, middleButton, shortButton, glassesButton, hokuroButton, beardButton]
+        
+        for btn in btnArray{
+            
+            btn.addTarget(self, action: #selector(self.tagChange(sender:)), for: UIControl.Event.touchUpInside)
+        }
     }
     
     //ツールバー生成
@@ -74,8 +109,7 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
         // BarButtonItemの配置
         toolBar.items = [spacer, commitButton]
         // textViewのキーボードにツールバーを設定
-        memo1TextField.inputAccessoryView = toolBar
-        memo2TextView.inputAccessoryView = toolBar
+        memoTextView.inputAccessoryView = toolBar
     }
     
     //Doneボタン押下時の処理
@@ -127,8 +161,8 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
     
     func textViewDidChange(_ textView: UITextView) {
         let maxHeight = 80.0  // 入力フィールドの最大サイズ
-        if(memo2TextView.frame.size.height.native < maxHeight) {
-            let size:CGSize = memo2TextView.sizeThatFits(memo2TextView.frame.size)
+        if(memoTextView.frame.size.height.native < maxHeight) {
+            let size:CGSize = memoTextView.sizeThatFits(memoTextView.frame.size)
             memo2TextViewHeight.constant = size.height
         }
     }
@@ -175,10 +209,8 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
     //DetailVCから遷移してきた時用に値をセットする
     func setTextField(){
         
-        if self.person!.memo1 != "" || self.person!.memo2 != ""{
-            
-            memo1TextField.text = self.person!.memo1
-            memo2TextView.text = self.person!.memo2
+        if self.person!.memo != ""{
+            memoTextView.text = self.person!.memo
         }
     }
     
@@ -196,229 +228,87 @@ class MemoCreateViewController: UIViewController, UITextFieldDelegate, UITextVie
     
     @objc func saveMemo() {
         
-        print("メモ内容：メモ１：「\(memo1TextField.text!)」メモ２：「\(memo2TextView.text!)」")
+        let genderArray = [maleButton, femaleButton, noGenderButton]
+        
+        let heightArray = [longButton, middleButton, shortButton]
+        
         try! realm.write{
             
-            person!.memo1 = memo1TextField.text!
-            person!.memo2 = memo2TextView.text!
+            person!.memo = memoTextView.text!
             
             personCategory?.person = self.person
             self.realm.add(self.person!, update: .modified)
+            
+            for btn in genderArray{
+                if btn?.tag == 1{
+                    person!.gender = (btn?.currentTitle)!
+                }
+            }
+            for btn in heightArray{
+                if btn?.tag == 1{
+                    person!.height = (btn?.currentTitle)!
+                }
+            }
+            
+            if glassesButton.tag == 1{
+                person!.glasses = true
+            }
+            if hokuroButton.tag == 1{
+                person!.hokuro = true
+            }
+            if beardButton.tag == 1{
+                person!.beard = true
+            }
+            
         }
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    let state = UIControl.State.normal
+    let OfffilterImage = UIImage(named: "filter1")
+    let OnfilterImage = UIImage(named: "filter2")
     
+    //TagImages & tag change when btn cricked
+    @objc func tagChange(sender: UIButton!){
+        
+        let genderArray = [maleButton, femaleButton, noGenderButton]
+        let heightArray = [longButton, middleButton, shortButton]
+        //let otherArray = [glassesButton, hokuroButton, beardButton]
+        
+        if sender.currentTitle == "男性" || sender.currentTitle == "女性" || sender.currentTitle == "どちらでもない"{
+            
+            //reset btn tag
+            for btn in genderArray{
+                btn?.tag = 0
+                btn?.setBackgroundImage(OfffilterImage, for: state)
+            }
+            sender.tag = 1
+            sender.setBackgroundImage(OnfilterImage, for: state)
+        }
+      
+        if sender.currentTitle == "高い" || sender.currentTitle == "普通" || sender.currentTitle == "低い"{
+            
+            //reset btn tag
+            for btn in heightArray{
+                btn?.tag = 0
+                btn?.setBackgroundImage(OfffilterImage, for: state)
+            }
+            sender.tag = 1
+            sender.setBackgroundImage(OnfilterImage, for: state)
+        }
+      
+        if sender.currentTitle == "メガネ" || sender.currentTitle == "ほくろ" || sender.currentTitle == "ひげ"{
+            
+            //選択中→選択解除
+            if sender.currentBackgroundImage == OnfilterImage{
+                sender.tag = 0
+                sender.setBackgroundImage(OfffilterImage, for: state)
+            }else{
+                sender.tag = 1
+                sender.setBackgroundImage(OnfilterImage, for: state)
+            }
+        }
+    }
     
-    
-    
-    
-    //
-    //    //半透明のボタンをタップするとpersonCategoryにcategoryを追加する
-    //
-    //    @objc func tagEvent(_ sender: UIButton){
-    //
-    //
-    //        let button = (sender as UIButton)
-    //        let text = sender.currentTitle
-    //        print("DEBUG_PRINT:customViewがタップされました！\(String(describing: text))")
-    //
-    //        //フラグがtrue=選択済みのものを再度タップされたら
-    //        if isSelected {
-    //            let image = UIImage(named: "UI15")
-    //            let state = UIControl.State.normal
-    //            button.setImage(image, for: state)
-    //
-    //            //Realmから削除
-    //        }else{
-    //            isSelected = true
-    //            let image = UIImage(named: "UI16")
-    //            let state = UIControl.State.normal
-    //            button.setImage(image, for: state)
-    //            //Realmに追加
-    //        }
-    //
-    //        //deleteButtonを有効にする
-    //
-    //        try! realm.write(){
-    //
-    //            personCategory!.category = category
-    //            category!.categoryName = (sender.titleLabel?.text)!
-    //            print("\(category!.categoryName)")
-    //            self.person!.personCategory.append(personCategory!)
-    //
-    //            realm.add(personCategory!.self)
-    //        }
-    //    }
-    
-    
-    //    //タグの削除(deleteButtonをタップ)
-    //
-    //    @objc func tapped(_ sender: UIButton){
-    //
-    //        //TODO:タグ名の取得->personの所持カテゴリー名と一致するrealmデータを削除
-    //        //true　false入れ替え？（タグは存在させたい）
-    //
-    //
-    //        try! realm.write(){
-    //
-    //            //realm.delete(<#T##object: ObjectBase##ObjectBase#>)
-    //        }
-    //        print("タグの削除ボタンがタップされました。")
-    //    }
-    
-    /*
-     // MARK: - バックアップ
-     */
-    
-    /*
-     func addpreEntry(count: Int){
-     
-     let stack = stackView
-     let index = stack!.arrangedSubviews.count
-     print("DEBUG_PRINT:stack index:\(index)")
-     let addView = stack!.arrangedSubviews[index]
-     
-     let scroll = scrolleView
-     //let offset = CGPoint(x: scroll!.contentOffset.x, y: scroll!.contentOffset.y + addView.frame.size.height)
-     
-     //let newView = PreCreateTagLabel(count: count)
-     //newView.isHidden = false
-     //stack!.insertArrangedSubview(newView, at: index)
-     
-     //UIView.animate(withDuration: 0.25) { () -> Void in
-     // newView.isHidden = false
-     //scroll!.contentOffset = offset
-     
-     }
-     */
-    
-    //いるかどうか検証
-    /*
-     func addEntry(categryName: String){
-     
-     let stack = stackView
-     let index = stack!.arrangedSubviews.count - 1
-     print("DEBUG_PRINT:stack index:\(index)")
-     let addView = stack!.arrangedSubviews[index]
-     
-     let scroll = scrolleView
-     let offset = CGPoint(x: scroll!.contentOffset.x, y: scroll!.contentOffset.y + addView.frame.size.height)
-     
-     let newView = CreateTagLabel(categoryname: categryName)
-     newView.isHidden = true
-     stack!.insertArrangedSubview(newView, at: index)
-     
-     UIView.animate(withDuration: 0.25) { () -> Void in
-     newView.isHidden = false
-     scroll!.contentOffset = offset
-     }
-     }
-     */
-    
-    
-    
-    //   collectonViewレイアウト
-    
-    
-    /*
-     
-     /*
-     //タグ作成時にタグのカスタムViewを生成する
-     func CreateTagLabel(categoryname: String, count: Int){
-     
-     let customView = LabelView(frame: CGRect(x: 0.0, y: 0.0, width: 300, height: 150))
-     customView.tagText.text = categoryname
-     print("DEBUG_PRINT:customView.tagText.text\(String(describing: customView.tagText.text))")
-     
-     self.view.layoutIfNeeded()
-     
-     customView.translatesAutoresizingMaskIntoConstraints = false
-     self.view.addSubview(customView)
-     
-     //self.contentView.setNeedsLayout()
-     
-     //self.contentView.layoutIfNeeded()
-     
-     scrolleView.contentSize.height += customView.frame.height/4
-     
-     var customHeight = 0
-     customHeight += 80*count
-     //customHeight += customHeight
-     print("DEBUG_PRINT:customHeigh:\(customHeight)")
-     print("DEBUG_PRINT:customView.frame.heigh:\(customView.frame)")
-     //let customHeight = 10.0 + customView.frame.height * CGFloat(count)
-     
-     // customViewの幅は、親ビューの幅の1/2
-     customView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3).isActive = true
-     // customViewの親ビューの高さの1/2
-     customView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.3).isActive = true
-     
-     // customViewの左端は、addTagButtonの右端から20ptの位置
-     customView.leadingAnchor.constraint(equalTo: addTagButton.leadingAnchor, constant: 0.0).isActive = true
-     
-     // customViewの上端は、addTagButtonの下端から指定
-     customView.topAnchor.constraint(equalTo: addTagButton.bottomAnchor, constant: CGFloat(customHeight)).isActive = true
-     
-     
-     //ボタンをタップした時に実行するメソッドを指定
-     customView.tagDeleteButton.addTarget(self, action: #selector(self.tapped(_:)), for:.touchUpInside)
-     }
-     
-     */
-     
-     //collectonView配置
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     
-     categorySearchResult = realm.objects(Category.self)
-     print("DEBUG_PRINT:collectioncellの数\(categorySearchResult!.count )")
-     return categorySearchResult!.count
-     }
-     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) //
-     cell.backgroundColor = .red  // セルの色
-     
-     
-     return cell
-     }
-     
-     func collectionViewLayout(){
-     
-     //super [viewDidLayoutSubviews];
-     
-     let customHeight = CGFloat(50)
-     let customWidth = self.view.frame.width
-     
-     // customViewの幅は、親ビューの幅の1/2
-     //collectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3).isActive = true
-     
-     //collectionView.contentSize = CGSize(width: customWidth, height: customHeight)
-     
-     collectionView.backgroundColor = .lightGray
-     // レイアウトを調整
-     let layout = UICollectionViewFlowLayout()
-     layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-     layout.itemSize = CGSize(width: 150, height: 60)
-     layout.minimumLineSpacing = 10
-     
-     collectionView.collectionViewLayout = layout
-     }
-     
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-     let horizontalSpace : CGFloat = 20
-     let cellSize : CGFloat = self.view.bounds.width / 3 - horizontalSpace
-     return CGSize(width: cellSize, height: cellSize)
-     }
-     */
-    
-    /*
-     //contentView cellのサイズ変更があったときに呼ばれる
-     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-     guard let cv = collectionView else { return false }
-     
-     return !newBounds.size.equalTo(cv.bounds.size)
-     }
-     */
     
 }
