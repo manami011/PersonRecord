@@ -20,17 +20,21 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     @IBOutlet weak var title2Label: UILabel!
     
     //フィルター表示
-    @IBOutlet weak var genderLabel: UIButton!
-    @IBOutlet weak var heightLabel: UIButton!
-    @IBOutlet weak var glassesLabel: UIButton!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var otherLabel: UILabel!
     
-    @IBOutlet weak var threestackView: UIStackView!
+    
     
     //メモ内容
-    @IBOutlet weak var memoLabel: PaddingLabel!
+    @IBOutlet weak var memoView: UITextView!
+    
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
+    
+   // @IBOutlet weak var contentView: UIView!
+    
     
     
     @IBOutlet weak var tagListView: TagListView!
@@ -56,6 +60,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         setUpView()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -80,12 +85,12 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         view.backgroundColor = UIColor.MyTheme.backgroundColor
         
         FaceImageLoad()
-        memoLabel.text = person!.memo
+        memoView.text = person!.memo
         
         
         let state = UIControl.State.normal
         nameButton.setTitle(person!.name, for: state)
-        PaddingLabel.CustomUILabel(label: memoLabel)
+        UITextView.CustomTextView(textView: memoView)
         
         PreCreateTagLabel()
         TagListView.CustomTagListView(tagListView: tagListView)
@@ -99,8 +104,8 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     func CreateFilterLabel(){
         
         
-        genderLabel.setTitle(person?.gender, for: UIControl.State.normal)
-        heightLabel.setTitle(person?.height, for: UIControl.State.normal)
+        genderLabel.text = person?.gender
+        heightLabel.text = person?.height
         
         let personfilters = [
              "メガネ" : person?.glasses,
@@ -108,25 +113,42 @@ class DetailViewController: UIViewController, TagListViewDelegate {
              "ひげ" : person?.beard
         ]
         
-        var xposition = 0
+        //var xposition = 0
+        
+        var labelText = ""
+        var i = 0
         for filter in personfilters{
-            
             
             if filter.value == true{
                 print("キー\(filter.key),value:\(filter.value)")
-                let btn = UIButton()
-                let image = UIImage(named: "filter1")
-                btn.setBackgroundImage(image, for: UIControl.State.normal)
-                btn.setTitle("\(filter.key)", for: UIControl.State.normal)
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
                 
-                xposition += 80
-                print("xposition:\(xposition)")
-                btn.setTitleColor(UIColor.black, for: UIControl.State.normal)
-                btn.frame = CGRect(x: xposition, y: 0, width: 80, height: 30)
-                threestackView.addSubview(btn)
-                self.view.bringSubviewToFront(threestackView)
+                i += 1
+                if i > 1{
+                    labelText = labelText + " , " + filter.key
+                }else{
+                    labelText = filter.key
+                }
+                    
+                
+                
+//
+//                let btn = UIButton()
+//                let image = UIImage(named: "filter1")
+//                btn.setBackgroundImage(image, for: UIControl.State.normal)
+//                btn.setTitle("\(filter.key)", for: UIControl.State.normal)
+//                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//
+//                xposition += 80
+//                print("xposition:\(xposition)")
+//                btn.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//                btn.frame = CGRect(x: xposition, y: 0, width: 80, height: 30)
+//                threestackView.addSubview(btn)
+//                self.view.bringSubviewToFront(threestackView)
             }
+//            let label = UILabel()
+//            label.text = "\(filter.key)"
+            
+            otherLabel.text = labelText
             
         }
         

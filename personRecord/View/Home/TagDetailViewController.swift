@@ -53,6 +53,11 @@ class TagDetailViewController: UIViewController, UICollectionViewDataSource, UIC
         personSearchResult = realm.objects(Person.self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     //セルのタップイベント
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("DEBUG_PRINT:セルに表示するpersonはこの人です！\(self.category?.personCategory[indexPath.row].person!.name)")

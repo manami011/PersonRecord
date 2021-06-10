@@ -134,7 +134,7 @@ class FilterSearchViewController: UIViewController, UITableViewDelegate, UITable
         let realm = try! Realm()
         
         if searchText.isEmpty{
-            searchResult = realm.objects(Person.self)
+            searchResult = realm.objects(Person.self).sorted(byKeyPath: "furigana")
         }else{
             //検索結果が0件だったら
             if(searchResult!.count == 0){
@@ -143,7 +143,7 @@ class FilterSearchViewController: UIViewController, UITableViewDelegate, UITable
                 
                 //検索結果が存在したら
             }else{
-                searchResult = realm.objects(Person.self).filter("furigana CONTAINS %@", searchText)
+                searchResult = realm.objects(Person.self).filter("furigana CONTAINS %@", searchText).sorted(byKeyPath: "furigana")
                 print("検索結果：\(searchResult!)")
             }
         }
@@ -224,21 +224,21 @@ class FilterSearchViewController: UIViewController, UITableViewDelegate, UITable
                 
                 if btn?.tag == 1{
                     gender = (btn?.currentTitle)!
-                    searchResult = realm.objects(Person.self).filter("gender == %@", gender)
+                    searchResult = realm.objects(Person.self).filter("gender == %@", gender).sorted(byKeyPath: "furigana")
                 }else{
                     i += 1
                 }
             }
         
         if i == 3{
-            searchResult = realm.objects(Person.self)
+            searchResult = realm.objects(Person.self).sorted(byKeyPath: "furigana")
         }
         
             i = 0
             for btn in heightArray{
                 if btn?.tag == 1{
                     height = (btn?.currentTitle)!
-                    searchResult2 = searchResult!.filter("height == %@", height)
+                    searchResult2 = searchResult!.filter("height == %@", height).sorted(byKeyPath: "furigana")
                 }else{
                     i += 1
                 }
@@ -251,7 +251,7 @@ class FilterSearchViewController: UIViewController, UITableViewDelegate, UITable
             
             if glassesButton.tag == 1{
                 glasses = true
-                searchResult3 = searchResult2!.filter("glasses == %@", glasses)
+                searchResult3 = searchResult2!.filter("glasses == %@", glasses).sorted(byKeyPath: "furigana")
             }else{
                 searchResult3 = searchResult2
             }
@@ -259,14 +259,14 @@ class FilterSearchViewController: UIViewController, UITableViewDelegate, UITable
         
             if hokuroButton.tag == 1{
                 hokuro = true
-                searchResult4 = searchResult3!.filter("hokuro == %@", hokuro)
+                searchResult4 = searchResult3!.filter("hokuro == %@", hokuro).sorted(byKeyPath: "furigana")
             }else{
                 searchResult4 = searchResult3
             }
         
             if beardButton.tag == 1{
                 beard = true
-                searchResult = searchResult4!.filter("beard == %@", beard)
+                searchResult = searchResult4!.filter("beard == %@", beard).sorted(byKeyPath: "furigana")
             }else{
                 searchResult = searchResult4
             }
