@@ -38,7 +38,7 @@ class FaceCreateViewController: UIViewController {
     //色の管理（色が変えられるもの）-------------------
     
     //髪の毛、肌
-    var haircolorNumber = 0
+    var haircolorNumber = 2
     var outlinecolorNumber = 0
     
     //眉毛
@@ -57,12 +57,12 @@ class FaceCreateViewController: UIViewController {
         
         //背景色の変更を実行するため、storyboardと非同期処理
         DispatchQueue.main.async {
-                   self.view.backgroundColor = UIColor.MyTheme.backgroundColor}
+            self.view.backgroundColor = UIColor.MyTheme.backgroundColor}
         // Do any additional setup after loading the view.
         
         //faceCreateView準備
         faceViewCreate()
-        
+        print("3髪型画像：\(faceCreateView.back.image) ")
        if faceCreateView == nil{
             print("DEBUG_PRINT:faceCreateViewはnilです。")
             return}else{
@@ -70,7 +70,10 @@ class FaceCreateViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("3髪の色：\(haircolorNumber)・髪型：\(backNumber)")
         FaceReLoad()
+        print("2髪の色：\(haircolorNumber)・髪型：\(backNumber)")
+        print("2髪型画像：\(faceCreateView.back.image)")
     }
     
     //他タブバーからの切り替え時に変更を反映する
@@ -107,6 +110,9 @@ class FaceCreateViewController: UIViewController {
         
         setUpfaceCreateView()
         setUpSlider()
+        
+        //backNumber = self.person!.backNumber
+        print("FaceCreate()")
     }
     
     
@@ -121,9 +127,17 @@ class FaceCreateViewController: UIViewController {
         let state = UIControl.State.normal
         faceCreateView.nameButton.setTitle(person!.name, for: state)
         
+        backNumber = self.person!.backNumber
+        frontNumber = self.person!.frontNumber
+        haircolorNumber = self.person!.haircolorNumber
+        
+        
         faceCreateView.back.image = UIImage(named: "b\(backNumber)\(haircolorNumber)")
         faceCreateView.outline.image = UIImage(named: "o\(outlineNumber)\(outlinecolorNumber)")
         faceCreateView.front.image = UIImage(named: "f\(frontNumber)\(haircolorNumber)")
+        
+        print("1髪の色：\(String(describing: self.person?.haircolorNumber))・髪型：\(String(describing: self.person?.backNumber))")
+        print("1髪型画像：\(String(describing: faceCreateView.back.image)) ")
         
         //目、眉毛、口（表情）
         faceCreateView.eye.image = UIImage(named: "eye\(eyeNumber)")

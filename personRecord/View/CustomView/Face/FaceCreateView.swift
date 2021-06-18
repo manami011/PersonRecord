@@ -20,12 +20,12 @@ class FaceCreateView: UIView {
     @IBOutlet weak var eyebrows: UIImageView!
     @IBOutlet weak var mouth: UIImageView!
     
-    
-    
     //メガネ、ほくろ、ひげ
     @IBOutlet weak var glasses: UIImageView!
     @IBOutlet weak var hokuro: UIImageView!
     @IBOutlet weak var beard: UIImageView!
+    
+    var FaceImageArray: [UIImageView]?
     
     
     //ボタン
@@ -49,6 +49,7 @@ class FaceCreateView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
 

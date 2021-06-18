@@ -51,7 +51,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b00" translatesAutoresizingMaskIntoConstraints="NO" id="YHM-do-VG5" userLabel="back">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="230"/>
                                 </imageView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="o00" translatesAutoresizingMaskIntoConstraints="NO" id="YKM-n1-Czj" userLabel="outline">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="o04" translatesAutoresizingMaskIntoConstraints="NO" id="YKM-n1-Czj" userLabel="outline">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="230"/>
                                 </imageView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f00" translatesAutoresizingMaskIntoConstraints="NO" id="e2b-4w-4TI" userLabel="front">
@@ -215,6 +215,6 @@
         <image name="icon3" width="65.5" height="65.5"/>
         <image name="icon6" width="65.5" height="66"/>
         <image name="m0" width="84" height="99"/>
-        <image name="o00" width="84" height="99"/>
+        <image name="o04" width="101" height="116"/>
     </resources>
 </document>

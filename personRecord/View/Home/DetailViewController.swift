@@ -11,6 +11,8 @@ import TagListView
 
 class DetailViewController: UIViewController, TagListViewDelegate {
     
+    weak var delegate: Mochi?
+    
     //似顔絵
     @IBOutlet weak var personImage: UIImageView!
     
@@ -33,7 +35,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-   // @IBOutlet weak var contentView: UIView!
+    // @IBOutlet weak var contentView: UIView!
     
     
     
@@ -64,8 +66,24 @@ class DetailViewController: UIViewController, TagListViewDelegate {
     }
     
     
+    @IBAction func EditingFace(_ sender: Any) {
+        
+        let faceTab = self.storyboard?.instantiateViewController(identifier: "portrait") as! PortraitTabBar
+        
+        let vc1 = faceTab.self.viewControllers![0] as! FaceCreateViewController
+        let vc2 = faceTab.self.viewControllers![1] as! FaceCreate2ViewController
+        let vc3 = faceTab.self.viewControllers![2] as! FaceCreate3ViewController
+        let vc4 = faceTab.self.viewControllers![3] as! FaceCreate4ViewController
+        
+        vc1.person = self.person
+        vc2.person = self.person
+        vc3.person = self.person
+        vc4.person = self.person
+        
+        self.navigationController?.pushViewController(faceTab, animated: true)
+    }
     
-    @IBAction func EditingPerson(_ sender: Any) {
+    @IBAction func EditingText(_ sender: Any) {
         
         let tagTab = self.storyboard?.instantiateViewController(identifier: "tagTab") as! MemoTabBar
         let memoVC = tagTab.self.viewControllers![0] as! MemoCreateViewController
@@ -78,6 +96,8 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         
         self.navigationController?.pushViewController(tagTab, animated: true)
     }
+    
+
     
     //表示内容セット
     func setUpView(){
@@ -108,9 +128,9 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         heightLabel.text = person?.height
         
         let personfilters = [
-             "メガネ" : person?.glasses,
-             "ほくろ" : person?.hokuro,
-             "ひげ" : person?.beard
+            "メガネ" : person?.glasses,
+            "ほくろ" : person?.hokuro,
+            "ひげ" : person?.beard
         ]
         
         //var xposition = 0
@@ -128,31 +148,9 @@ class DetailViewController: UIViewController, TagListViewDelegate {
                 }else{
                     labelText = filter.key
                 }
-                    
-                
-                
-//
-//                let btn = UIButton()
-//                let image = UIImage(named: "filter1")
-//                btn.setBackgroundImage(image, for: UIControl.State.normal)
-//                btn.setTitle("\(filter.key)", for: UIControl.State.normal)
-//                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-//
-//                xposition += 80
-//                print("xposition:\(xposition)")
-//                btn.setTitleColor(UIColor.black, for: UIControl.State.normal)
-//                btn.frame = CGRect(x: xposition, y: 0, width: 80, height: 30)
-//                threestackView.addSubview(btn)
-//                self.view.bringSubviewToFront(threestackView)
             }
-//            let label = UILabel()
-//            label.text = "\(filter.key)"
-            
             otherLabel.text = labelText
-            
         }
-        
-        
     }
     
     func FaceImageLoad(){
@@ -194,7 +192,7 @@ class DetailViewController: UIViewController, TagListViewDelegate {
         }
     }
     
- 
+    
     
     
     /*

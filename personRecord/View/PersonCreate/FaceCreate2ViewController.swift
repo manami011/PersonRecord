@@ -43,7 +43,7 @@ class FaceCreate2ViewController: UIViewController {
     //色の管理（色が変えられるもの）-------------------
     
     //髪の毛、肌
-    var haircolorNumber = 0
+    var haircolorNumber = 2
     var outlinecolorNumber = 0
     
     //眉毛
