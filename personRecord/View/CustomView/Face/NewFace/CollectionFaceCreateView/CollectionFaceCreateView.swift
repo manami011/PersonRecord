@@ -12,6 +12,7 @@ class CollectionFaceCreateView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var faceView: FaceView!
+    
     @IBOutlet weak var collectionView1: UICollectionView!
     
     

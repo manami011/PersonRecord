@@ -19,6 +19,7 @@
 		C81E8C6C265E0D2600A3F010 /* FaceCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C81E8C6B265E0D2600A3F010 /* FaceCreateView.xib */; };
 		C84C4DB5266DD5D1009B1D84 /* FaceCreateViewiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C4DB4266DD5D1009B1D84 /* FaceCreateViewiPad.swift */; };
 		C84C4DB9266DD608009B1D84 /* FaceCreateViewiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C84C4DB8266DD608009B1D84 /* FaceCreateViewiPad.xib */; };
+		C850630826846DB20016BD53 /* ImageSrc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C850630726846DB20016BD53 /* ImageSrc.swift */; };
 		C8594B2D2660932D006A5719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C85A2654264A4CB6007B3FF0 /* Assets.xcassets */; };
 		C8594B302660938D006A5719 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8594B2F2660938D006A5719 /* Images.xcassets */; };
 		C85A264C264A4CB5007B3FF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */; };
@@ -30,6 +31,8 @@
 		C85A266E264CF5A3007B3FF0 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A266D264CF5A3007B3FF0 /* Category.swift */; };
 		C85A2672264D0146007B3FF0 /* FaceCreate3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2671264D0146007B3FF0 /* FaceCreate3ViewController.swift */; };
 		C85A2675264D0787007B3FF0 /* PersonCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85A2674264D0787007B3FF0 /* PersonCategory.swift */; };
+		C85DF46B267F289B00A419D9 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85DF469267F289B00A419D9 /* SelectCell.swift */; };
+		C85DF46C267F289B00A419D9 /* SelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DF46A267F289B00A419D9 /* SelectCell.xib */; };
 		C862CACD264E56AA0064880B /* NameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CACC264E56AA0064880B /* NameCreateViewController.swift */; };
 		C862CAD02651F7320064880B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CACF2651F7320064880B /* DetailViewController.swift */; };
 		C862CAD32651FAE30064880B /* MemoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C862CAD22651FAE30064880B /* MemoCreateViewController.swift */; };
@@ -85,6 +88,7 @@
 		C81E8C6B265E0D2600A3F010 /* FaceCreateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceCreateView.xib; sourceTree = "<group>"; };
 		C84C4DB4266DD5D1009B1D84 /* FaceCreateViewiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCreateViewiPad.swift; sourceTree = "<group>"; };
 		C84C4DB8266DD608009B1D84 /* FaceCreateViewiPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceCreateViewiPad.xib; sourceTree = "<group>"; };
+		C850630726846DB20016BD53 /* ImageSrc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSrc.swift; sourceTree = "<group>"; };
 		C8594B2F2660938D006A5719 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C85A2648264A4CB5007B3FF0 /* personRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = personRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		C85A266D264CF5A3007B3FF0 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		C85A2671264D0146007B3FF0 /* FaceCreate3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCreate3ViewController.swift; sourceTree = "<group>"; };
 		C85A2674264D0787007B3FF0 /* PersonCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCategory.swift; sourceTree = "<group>"; };
+		C85DF469267F289B00A419D9 /* SelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
+		C85DF46A267F289B00A419D9 /* SelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCell.xib; sourceTree = "<group>"; };
 		C862CACC264E56AA0064880B /* NameCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCreateViewController.swift; sourceTree = "<group>"; };
 		C862CACF2651F7320064880B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C862CAD22651FAE30064880B /* MemoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCreateViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +220,41 @@
 			path = TableCell;
 			sourceTree = "<group>";
 		};
+		C8506304268467AC0016BD53 /* FaceView */ = {
+			isa = PBXGroup;
+			children = (
+				C8E76A652657631300993BFC /* FaceView.swift */,
+				C8E76A69265763D700993BFC /* FaceView.xib */,
+			);
+			path = FaceView;
+			sourceTree = "<group>";
+		};
+		C8506305268467BC0016BD53 /* SelectCell */ = {
+			isa = PBXGroup;
+			children = (
+				C85DF469267F289B00A419D9 /* SelectCell.swift */,
+				C85DF46A267F289B00A419D9 /* SelectCell.xib */,
+			);
+			path = SelectCell;
+			sourceTree = "<group>";
+		};
+		C8506306268467D40016BD53 /* CollectionFaceCreateView */ = {
+			isa = PBXGroup;
+			children = (
+				C8FF72FF2678E21B00E81A87 /* CollectionFaceCreateView.xib */,
+				C8FF73032678E23400E81A87 /* CollectionFaceCreateView.swift */,
+			);
+			path = CollectionFaceCreateView;
+			sourceTree = "<group>";
+		};
+		C850630926846DBD0016BD53 /* ImageSrc */ = {
+			isa = PBXGroup;
+			children = (
+				C850630726846DB20016BD53 /* ImageSrc.swift */,
+			);
+			path = ImageSrc;
+			sourceTree = "<group>";
+		};
 		C85A263F264A4CB5007B3FF0 = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +278,7 @@
 			children = (
 				C85A264B264A4CB5007B3FF0 /* AppDelegate.swift */,
 				C85A264D264A4CB5007B3FF0 /* SceneDelegate.swift */,
+				C8B524F82671E16A00459B7F /* Extebtion */,
 				C85A266C264CF4A7007B3FF0 /* View */,
 				C85A266B264CF47C007B3FF0 /* Model */,
 				C85A2651264A4CB5007B3FF0 /* Main.storyboard */,
@@ -251,9 +293,9 @@
 		C85A266B264CF47C007B3FF0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C8FF73082679CB1300E81A87 /* Data */,
-				C8FF73072679CAFD00E81A87 /* Person */,
-				C8B524F82671E16A00459B7F /* Extebtion */,
+				C850630926846DBD0016BD53 /* ImageSrc */,
+				C8FF73082679CB1300E81A87 /* FaceData */,
+				C8FF73072679CAFD00E81A87 /* PersonData */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -359,31 +401,30 @@
 		C8FF72FE2678E1DD00E81A87 /* NewFace */ = {
 			isa = PBXGroup;
 			children = (
-				C8E76A69265763D700993BFC /* FaceView.xib */,
-				C8E76A652657631300993BFC /* FaceView.swift */,
-				C8FF72FF2678E21B00E81A87 /* CollectionFaceCreateView.xib */,
-				C8FF73032678E23400E81A87 /* CollectionFaceCreateView.swift */,
+				C8506306268467D40016BD53 /* CollectionFaceCreateView */,
+				C8506305268467BC0016BD53 /* SelectCell */,
+				C8506304268467AC0016BD53 /* FaceView */,
 			);
 			path = NewFace;
 			sourceTree = "<group>";
 		};
-		C8FF73072679CAFD00E81A87 /* Person */ = {
+		C8FF73072679CAFD00E81A87 /* PersonData */ = {
 			isa = PBXGroup;
 			children = (
 				C85A2668264CF37F007B3FF0 /* Person.swift */,
 				C85A266D264CF5A3007B3FF0 /* Category.swift */,
 				C85A2674264D0787007B3FF0 /* PersonCategory.swift */,
 			);
-			path = Person;
+			path = PersonData;
 			sourceTree = "<group>";
 		};
-		C8FF73082679CB1300E81A87 /* Data */ = {
+		C8FF73082679CB1300E81A87 /* FaceData */ = {
 			isa = PBXGroup;
 			children = (
 				C8B035142671EFA3004DFE46 /* FaceData.swift */,
 				C8FF73092679CB2A00E81A87 /* ImageData.swift */,
 			);
-			path = Data;
+			path = FaceData;
 			sourceTree = "<group>";
 		};
 		DF888827DA43B67B565A57B0 /* Pods */ = {
@@ -460,6 +501,7 @@
 				C84C4DB9266DD608009B1D84 /* FaceCreateViewiPad.xib in Resources */,
 				C8ABC07926561F510000DDEC /* MemoTabBar.swift in Resources */,
 				C8594B2D2660932D006A5719 /* Assets.xcassets in Resources */,
+				C85DF46C267F289B00A419D9 /* SelectCell.xib in Resources */,
 				C85A2658264A4CB6007B3FF0 /* LaunchScreen.storyboard in Resources */,
 				C8594B302660938D006A5719 /* Images.xcassets in Resources */,
 				C81E8C6C265E0D2600A3F010 /* FaceCreateView.xib in Resources */,
@@ -524,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C850630826846DB20016BD53 /* ImageSrc.swift in Sources */,
 				C80EA528265DCA9F00806FF6 /* costomTableViewCell.swift in Sources */,
 				C881B7A9265CDE9600709097 /* CategoryLabel.swift in Sources */,
 				C8FF73042678E23400E81A87 /* CollectionFaceCreateView.swift in Sources */,
@@ -560,6 +603,7 @@
 				C8DFF48A2655E5A3004BCD95 /* FaceCreate4ViewController.swift in Sources */,
 				C84C4DB5266DD5D1009B1D84 /* FaceCreateViewiPad.swift in Sources */,
 				C862CACD264E56AA0064880B /* NameCreateViewController.swift in Sources */,
+				C85DF46B267F289B00A419D9 /* SelectCell.swift in Sources */,
 				C81E8C64265E071F00A3F010 /* TagTableViewCell.swift in Sources */,
 				C8D54C202654C33300775AE2 /* FaceCreate2ViewController.swift in Sources */,
 				C85A2672264D0146007B3FF0 /* FaceCreate3ViewController.swift in Sources */,

@@ -37,8 +37,8 @@ class TacetestViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionFaceCreateView = nib.instantiate(withOwner: self, options: nil).first as? CollectionFaceCreateView
         
         // カスタムセルを登録する
-        let cnib = UINib(nibName: "CollectionViewCell", bundle: nil)
-        collectionFaceCreateView.collectionView1.register(cnib, forCellWithReuseIdentifier: "Cell")
+        let cnib = UINib(nibName: "SelectCell", bundle: nil)
+        collectionFaceCreateView.collectionView1.register(cnib, forCellWithReuseIdentifier: "SelectCell")
         collectionFaceCreateView.collectionView1.collectionViewLayout = collectionViewLayout()
         
         self.view.addSubview(collectionFaceCreateView)
@@ -55,11 +55,15 @@ class TacetestViewController: UIViewController, UICollectionViewDataSource, UICo
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectCell", for: indexPath) as! SelectCell
+        //cell.selectedImage = 
+        
+        
+        return cell
     }
     
     //コレクションビューのレイアウト

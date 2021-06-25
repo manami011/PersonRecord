@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc protocol Mochi: class{
+@objc protocol Mochi: AnyObject{
     
      func sliderMove(back:Int, front:Int, outline:Int, eye:Int, eyebrows:Int, mouth:Int, glasses:Int, hokuro:Int, beard:Int,
                     haircolor:Int, outlinecolor:Int, glassescolor:Int, beardcolor:Int)

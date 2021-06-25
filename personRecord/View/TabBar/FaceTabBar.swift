@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc protocol Slider: class{
+@objc protocol Slider: AnyObject{
     
     func sliderMove(numArray: [Int])
 }
